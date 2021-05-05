@@ -1,0 +1,29 @@
+---
+#
+# Garage cover for the door
+#
+# https://www.home-assistant.io/integrations/cover.template/
+#
+
+
+platform: template
+covers:
+  garage:
+    device_class: garage
+    friendly_name: "Garage"
+    value_template: "{{ states('sensor.garagedoor_status') }}"
+    open_cover:
+      service: switch.toggle
+      data:
+        entity_id: switch.shelly_garage
+    close_cover:
+      service: switch.toggle
+      data:
+        entity_id: switch.shelly_garage
+    
+    icon_template: >-
+      {% if states('sensor.garagedoor_status')=="True" %}
+        mdi:garage-open
+      {% else %}
+        mdi:garage
+      {% endif %}

@@ -1,0 +1,189 @@
+
+#=========================
+#=== TEMPERATURE SETTINGS
+#=========================
+type: entities
+entities:
+
+  - type: custom:hui-element
+    card_type: vertical-stack
+    cards:
+
+      #=== Temperature Settings
+      - type: custom:button-card  
+        show_icon: false
+        name: TEMPERATUR EINSTELLUNGEN
+        tap_action:
+          action: none
+        styles: &title_style
+          card:
+            - color: var(--secondary-text-color)
+            - box-shadow: none
+            - border-radius: 0em
+            - background: none
+            - padding-top: 0em
+            - padding-bottom: 0em
+            - padding-left: 0.5em
+            - font-family: >
+                [[[
+                  return states['input_text.irrigation_ui_font_family'].state
+                ]]]
+            - font-size: 18px
+          name:
+            - justify-self: start
+            - border-left: 3px solid var(--accent-color)
+            - padding-left: 0.5em
+
+      #=== Number of days to use
+      - !include
+          - ../item_settings_line.yaml
+          - entity: input_number.irrigation_days_of_temp_history_used
+            name: Berücksichtigte Tage
+            label: (0 bis 4) Bei 0 wird nur heutige Temperatur verwendet
+
+      #=== Temperature Baseline
+      - !include
+          - ../item_settings_line.yaml
+          - entity: input_number.irrigation_temperature_baseline
+            name: Grundwert Temperatur
+            label: Überschreiten dieses Wertes erhöht Bewässerungszeit
+            padding: 0em 0em 0.3em 0em
+
+      #-------------------------
+      - type: custom:hui-element
+        row_type: divider
+      #-------------------------
+
+      #=== Temperature Data
+      - type: custom:button-card  
+        show_icon: false
+        name: TEMPERATUR DATEN
+        tap_action:
+          action: none
+        styles: *title_style
+
+      #=== Temperature Multiplier
+      - !include
+          - ../item_settings_multiplier_line.yaml
+          - entity: input_number.irrigation_temp_multiplier
+            name: "Multiplikator ( \U00002139 )"
+            label: Berechnet auf Basis Temp. und Grundwerten
+
+      #=== Highest Forecast High Temperature Today
+      - !include
+          - ../item_settings_line.yaml
+          - entity: input_number.irrigation_temperature_highest_forecast_high_temp_today
+            name: Höchste Temperaturvorhersage heute
+            round: 1
+            tap_action: none
+
+  #=== Highest Actual Temperature Today
+      - !include
+          - ../item_settings_line.yaml
+          - entity: input_number.irrigation_temperature_highest_actual_temp_today
+            name: Höchste aktuell ermittelte Temperatur heute
+            round: 1
+            tap_action: none
+            padding: 0em 0em 0.3em 0em
+
+
+      #-------------------------
+      - type: custom:hui-element
+        row_type: divider
+      #-------------------------
+
+
+      #=== Forecast High vs. Actual Temperature
+      - type: custom:button-card  
+        show_icon: false
+        name:  HÖCHSTTEMPERATUREN - <font color=IndianRed>Vorhersage</font> vs. <font color=SteelBlue>Ist</font>
+        tap_action:
+          action: none
+        styles: *title_style
+
+      #=== Forecast vs. Actual High Temperature Graph
+      - !include item_settings_temperature_graph.yaml
+
+      #=== Use Forecast High Temperature
+      - !include item_settings_use_forecast_high_temp.yaml
+
+
+      #-------------------------
+      - type: custom:hui-element
+        row_type: divider
+      #-------------------------
+
+
+      #=== Temperature History
+      - type: custom:button-card  
+        show_icon: false
+        name: TEMPERATUR VERLAUF
+        tap_action:
+          action: none
+        styles: *title_style
+
+      - type: custom:button-card
+        show_icon: false
+        name: keine Tagesvergleiche (nur heute)
+        tap_action:
+          action: none
+        styles:
+          card:
+            - color: var(--primary-text-color)
+            - border-radius: 0em
+            - background: none
+            - padding-top: 0em
+            - padding-bottom: 0em
+            - padding-left: 0.5em
+            - font-family: >
+                [[[
+                  return states['input_text.irrigation_ui_font_family'].state
+                ]]]
+            - font-size: 14px
+            - display: >
+                [[[ return states['input_number.irrigation_days_of_temp_history_used'].state > 0 ? 'none' : 'unset' ]]]
+          name:
+            - justify-self: start
+            - padding-left: 1.2em
+        
+
+      #=== High Temperature Yesterday
+      - !include
+          - ../item_settings_line.yaml
+          - entity: sensor.temp_minus1
+            name: Gestern
+            round: 1
+            tap_action: none
+            display_condition: "[[[ return states['input_number.irrigation_days_of_temp_history_used'].state < 1 ? 'none' : 'unset' ]]]"
+
+      #=== High Temperature 2 Days Ago
+      - !include
+          - ../item_settings_line.yaml
+          - entity: sensor.temp_minus2
+            name: vor 2 Tagen
+            round: 1
+            tap_action: none
+            display_condition: "[[[ return states['input_number.irrigation_days_of_temp_history_used'].state < 2 ? 'none' : 'unset' ]]]"
+
+      #=== High Temperature 3 Days Ago
+      - !include
+          - ../item_settings_line.yaml
+          - entity: sensor.temp_minus3
+            name: vor 3 Tagen
+            round: 1
+            tap_action: none
+            display_condition: "[[[ return states['input_number.irrigation_days_of_temp_history_used'].state < 3 ? 'none' : 'unset' ]]]"
+
+      #=== High Temperature 4 Days Ago
+      - !include
+          - ../item_settings_line.yaml
+          - entity: sensor.temp_minus4
+            name: vor 4 Tagen
+            round: 1
+            tap_action: none
+            display_condition: "[[[ return states['input_number.irrigation_days_of_temp_history_used'].state < 4 ? 'none' : 'unset' ]]]"
+
+style: >
+  ha-card {
+    box-shadow: none;
+  }

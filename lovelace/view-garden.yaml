@@ -1,0 +1,140 @@
+title: Garten
+path: garden
+icon: mdi:tree-outline
+
+cards:
+
+#
+# Garden lights
+#
+- type: vertical-stack
+  cards:
+    - type: markdown
+      content: >
+        ## Gartenbeleuchtung
+    - type: horizontal-stack
+      cards:  #
+
+      - type: custom:button-card
+        entity: group.g_gardenlights_left
+        name: Garten links
+        icon: mdi:lightbulb-group
+        show_state: true
+        styles:
+          card:
+            - font-size: 10px
+            - text-transform: capitalize
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: start
+            - padding-left: 10px
+            - font-weight: bold
+            - font-size: 16px
+            #- text-transform: lowercase
+          state:
+            - justify-self: start
+            - padding-left: 10px
+            - font-size: 12px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+
+      - type: custom:button-card
+        entity: group.g_gardenlights_right
+        name: Garten rechts
+        icon: mdi:lightbulb-group
+        show_state: true
+        styles:
+          card:
+            - font-size: 10px
+            - text-transform: capitalize
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: start
+            - padding-left: 10px
+            - font-weight: bold
+            - font-size: 16px
+          state:
+            - justify-self: start
+            - padding-left: 10px
+            - font-size: 12px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+
+      - type: custom:button-card
+        entity: group.g_gardenlights_all
+        name: Garten alle
+        icon: mdi:lightbulb-group
+        show_state: true
+        styles:
+          card:
+            - font-size: 10px
+            - text-transform: capitalize
+          grid:
+            - grid-template-areas: '"i" "n" "s"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr min-content min-content
+          img_cell:
+            - align-self: start
+            - text-align: start
+          name:
+            - justify-self: start
+            - padding-left: 10px
+            - font-weight: bold
+            - font-size: 16px
+          state:
+            - justify-self: start
+            - padding-left: 10px
+            - font-size: 12px
+        state:
+          - value: 'off'
+            styles:
+              card:
+                - filter: opacity(50%)
+              icon:
+                - filter: grayscale(100%)
+        
+    - type: horizontal-stack
+      cards:  #
+          
+      - type: entities
+        title: Gartenlichter links
+        show_header_toggle: false
+        entities:
+          - entity: light.shelly_shsw_1_111a7a
+            name: Links
+          - entity: light.shelly_shsw_1_1179e3
+            name: Mitte
+
+      - type: entities
+        title: Gartenlichter rechts
+        show_header_toggle: false
+        entities:
+          - entity: light.shelly_shsw_1_500291f04b61
+            name: Hainbuche vorn
+          - entity: light.shelly_shsw_1_f4cfa2768401
+            name: Hainbuche hinten
+          - entity: switch.shelly_shsw_1_500291f04aa1
+            name: Hasenstall
+

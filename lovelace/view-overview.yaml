@@ -1,0 +1,398 @@
+title: Übersicht
+path: overview
+icon: mdi:home
+
+cards:
+
+- type: vertical-stack
+  cards:
+    
+  - type: horizontal-stack
+    cards:  #
+    # PERSONS present on site
+    - type: picture-entity
+      entity: device_tracker.piz_palu_2
+      image: /local/people/hauke.png
+      name: Hauke
+      show_name: true
+      show_state: false
+      tap_action: none
+      state_filter:
+        unavailable: grayscale(100%)
+        not_home: grayscale(100%)
+
+    - type: picture-entity
+      entity: device_tracker.brittas_iphone_2
+      image: /local/people/britta.png
+      name: Britta
+      show_name: true
+      show_state: false
+      tap_action: none
+      state_filter:
+        unavailable: grayscale(100%)
+        not_home: grayscale(100%)
+
+    - type: picture-entity
+      entity: device_tracker.janas_iphone
+      image: /local/people/jana.png
+      name: Jana
+      show_name: true
+      show_state: false
+      tap_action: none
+      state_filter:
+        unavailable: grayscale(100%)
+        not_home: grayscale(100%)
+
+    - type: picture-entity
+      entity: device_tracker.emmas_iphone
+      image: /local/people/emma.png
+      name: Emma
+      show_name: true
+      show_state: false
+      tap_action: none
+      state_filter:
+        unavailable: grayscale(100%)
+        not_home: grayscale(100%)
+
+
+# - type: 'custom:button-card'
+#   entity: device_tracker.piz_palu
+#   aspect_ratio: 2/1
+#   name: Hauke
+#   show_entity_picture: true
+#   state:
+#     - value: home
+#       styles:
+#         name:
+#           - color: green
+#       entity_picture: /local/people/hauke.png
+#     - value: away
+#       entity_picture: /local/people/hauke_off.png
+#       styles:
+#         name:
+#         - color: '#EF4F1A'
+#   styles:
+#     card:
+#       - border-radius: 0%
+#       - padding: 5%
+#       - color: ivory
+#       - font-size: 12px
+#       - text-shadow: 0px 0px 0px black
+#       - text-transform: capitalize
+#       - justify-self: end
+#       - align-self: middle
+#       - font-family: avenir
+#     name:
+#       - font-size: 16px
+#       - align-self: middle
+#       - justify-self: start
+#       - padding-bottom: 0px
+
+#-------------------
+
+
+
+#
+# Weather card
+#
+- type: vertical-stack
+  cards:
+    - type: markdown
+      content: >
+        ## Wetter
+    - type: weather-forecast
+      # entity: weather.dark_sky
+      entity: weather.openweathermap
+      name: Dreieich
+      show_forecast: false
+
+#
+# Utility cards
+#
+- type: vertical-stack
+  cards:
+    - type: markdown
+      content: >
+        ## Garage und Müll
+
+
+# content: >
+# <ha-icon icon= {{'mdi:delete-alert' if states('sensor.trash_firstdate') == 'vandaag' else 'mdi:delete-outline'}}> </ha-icon> Vandaag, {{states('sensor.vandaag')}}: <font color= {{states('sensor.trash_color')}}>**{{states('sensor.trash_today')}}</font>**
+
+# <ha-icon icon= {{states('sensor.trash_next_icon')}}> </ha-icon> Volgende afval-ophaal over **<font color={{states('sensor.trash_next_color')}}>{{states('sensor.trash_next')}}</font>** {{'dag' if states('sensor.trash_next') == '1' else 'dagen'}} op:
+
+# <ha-icon icon= 'mdi:delete-alert'> </ha-icon> {{states('sensor.trash_firstdate')|capitalize}}: **<font color={{states('sensor.trash_next_color')}}>{{states('sensor.trash_firstwastetype')}}</font>**
+
+
+
+
+    - type: horizontal-stack
+      cards:
+        #
+        # Garage activation button
+        #            
+        - type: 'custom:button-card'
+          entity: cover.garage  
+          double_tap_action:
+            action: call-service
+            service: cover.open_cover
+            service_data:
+              entity_id: cover.garage
+          tap_action:
+            action: call-service
+            service: cover.close_cover
+            service_data:
+              entity_id: cover.garage
+          show_state: true
+          size: 40%
+          state:
+            - color: rgb(116,196,73)
+              icon: 'mdi:garage'
+              value: closed
+            - color: rgb(255,203,152)
+              icon: 'mdi:garage-open'
+              value: open
+              card:
+                - filter: brightness(40%)
+            
+          styles:
+            # card:
+            #   - width: 200px
+            #   - height: 100px
+            grid:
+              - grid-template-areas: '"i" "n" "s"'
+              - grid-template-columns: 1fr
+              - grid-template-rows: 1fr min-content min-content
+            img_cell:
+              - align-self: start
+              - text-align: start
+            name:
+              - justify-self: start
+              - padding-left: 10px
+              - font-weight: bold
+              - font-size: 12px
+              # - text-transform: lowercase
+            state:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px        
+              - text-transform: lowercase
+
+        #---------------------------------------------------------------------------------
+        # Waste INFO button-card
+        #---------------------------------------------------------------------------------
+        - type: custom:button-card
+          entity:  group.gcoll_waste_info
+          icon: mdi:truck
+          label: >
+              [[[
+                var d = states['sensor.gcoll_next_date'].attributes.days;
+                if(d==0) return 'Abholung heute';
+                else if (d==1) return 'Abholung morgen';
+                else if (d>0) return ('Abholung in ' + d + ' Tagen');
+              ]]]
+          show_state: false
+          show_label: true
+          # aspect_ratio: 2/1
+          tap_action:
+            action: more-info
+          state:
+            - value: "Heute"
+              color: 'red'
+              # styles:
+              #   card:
+              #     - filter: opacity(50%)
+            - value: "Morgen"
+              color: 'orange'
+          styles:
+            # card:
+            #   - width: 200px
+            #   - height: 100px
+            icon: 
+              - color: >
+                  [[[
+                    var t = states['sensor.gcoll_next_date'].attributes.type;
+                    if (t.includes('Bio')) return 'rgb(146, 95, 58)';
+                    else if (t.includes('Papier')) return 'rgb(10, 80, 137)';
+                    else if (t.includes('Gelb')) return 'rgb(255,218,68)';
+                    else if (t.includes('Rest')) return 'rgb(114,60,32)';
+                  ]]]
+            grid:
+              - grid-template-areas: '"i" "n" "s" "l"'
+              - grid-template-columns: 1fr
+              - grid-template-rows: 1fr min-content min-content
+            img_cell:
+              - align-self: start
+              - text-align: start
+            label:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px
+            name:
+              - justify-self: start
+              - padding-left: 10px
+              - font-weight: bold
+              - font-size: 12px
+              # - text-transform: lowercase
+            state:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px
+              
+#
+# Waste type detail buttons
+#
+- type: vertical-stack
+  cards:
+    - type: markdown
+      content: >
+        ## Müll
+    - type: horizontal-stack
+      cards:  #
+        - type: custom:button-card
+          entity: sensor.ics_1
+          name: Papier
+          # icon: mdi:package-variant
+          label: >
+              [[[
+                var r = states['sensor.ics_1'].attributes.remaining;
+                if(r===0) return 'Abholung heute';
+                else if (r>0) return ('in ' + r + ' Tagen');
+              ]]]
+          show_state: true
+          show_label: true
+          styles:
+            icon:
+              - color: rgb(10, 80, 137)
+            grid:
+              - grid-template-areas: '"i" "n" "s" "l"'
+              - grid-template-columns: 1fr
+              - grid-template-rows: 1fr min-content min-content
+            img_cell:
+              - align-self: start
+              - text-align: start
+              
+            name:
+              - justify-self: start
+              - padding-left: 10px
+              - font-weight: bold
+              - font-size: 16px
+            label:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px
+            state:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px
+        
+                  
+        - type: custom:button-card
+          entity: sensor.ics_2
+          name: Bioabfall
+          icon: mdi:tree
+          label: >
+              [[[
+                var r = states['sensor.ics_2'].attributes.remaining;
+                if(r===0) return 'Abholung heute';
+                else if (r>0) return ('in ' + r + ' Tagen');
+              ]]]
+          show_state: true
+          show_label: true
+          styles:
+            grid:
+              - grid-template-areas: '"i" "n" "s" "l"'
+              - grid-template-columns: 1fr
+              - grid-template-rows: 1fr min-content min-content
+            img_cell:
+              - align-self: start
+              - text-align: start
+            icon:
+              - color: rgb(146, 95, 58)
+            name:
+              - justify-self: start
+              - padding-left: 10px
+              - font-weight: bold
+              - font-size: 16px
+            label:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px
+            state:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px
+
+
+        - type: custom:button-card
+          entity: sensor.ics_3
+          name: Gelber Sack
+          icon: mdi:recycle
+          label: >
+              [[[
+                var r = states['sensor.ics_3'].attributes.remaining;
+                if(r===0) return 'Abholung heute';
+                else if (r>0) return ('in ' + r + ' Tagen');
+              ]]]
+          show_state: true
+          show_label: true
+          styles:
+            grid:
+              - grid-template-areas: '"i" "n" "s" "l"'
+              - grid-template-columns: 1fr
+              - grid-template-rows: 1fr min-content min-content
+            img_cell:
+              - align-self: start
+              - text-align: start
+            icon:
+              - color: rgb(255,218,68)
+            name:
+              - justify-self: start
+              - padding-left: 10px
+              - font-weight: bold
+              - font-size: 16px
+            label:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px
+            state:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px
+
+
+        - type: custom:button-card
+          entity: sensor.ics_4
+          name: Restmüll
+          icon: mdi:trash-can-outline
+          label: >
+              [[[
+                var r = states['sensor.ics_4'].attributes.remaining;
+                if(r===0) return 'Abholung heute';
+                else if (r>0) return ('in ' + r + ' Tagen');
+              ]]]
+          show_state: true
+          show_label: true
+          styles:
+            grid:
+              - grid-template-areas: '"i" "n" "s" "l"'
+              - grid-template-columns: 1fr
+              - grid-template-rows: 1fr min-content min-content
+            img_cell:
+              - align-self: start
+              - text-align: start
+            icon:
+              - color: rgb(65, 66, 64)
+            name:
+              - justify-self: start
+              - padding-left: 10px
+              - font-weight: bold
+              - font-size: 16px
+            label:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px
+            state:
+              - justify-self: start
+              - padding-left: 10px
+              - font-size: 12px

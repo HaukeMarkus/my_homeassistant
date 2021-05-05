@@ -1,0 +1,18 @@
+---
+############################################
+# The speedtestdotnet integration uses the Speedtest.net
+# web service to measure network bandwidth performance.
+#
+# https://www.home-assistant.io/integrations/speedtestdotnet/
+#
+speedtestdotnet:
+  server_id: 18488
+  scan_interval:
+    minutes: 60
+    seconds: 0
+    hours: 0
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+  

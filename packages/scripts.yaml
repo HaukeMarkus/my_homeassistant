@@ -1,0 +1,37 @@
+---
+############################################
+##
+##  Garagedoor script to simulate toggle
+##
+############################################
+
+script:
+  restart_ha:
+    alias: Restart Homeassistant
+    sequence:
+      - service: homeassistant.reload_core_config
+
+  reload_automations:
+    alias: Reload Automations
+    sequence:
+      - service: automation.reload
+
+  # garage_oeffnen:
+  #   alias: "Garagentor öffnen"
+  #   sequence:
+  #     - condition: state
+  #       entity_id: binary_sensor.shelly_shsw_1_500291f04b24
+  #       state: 'off'
+  #     - service: switch.turn_on
+  #       data:
+  #           entity_id: switch.shelly_shsw_1_500291f04b24
+      
+  # garage_schliessen:
+  #   alias: "Garagentor schließen"
+  #   sequence:
+  #     - condition: state
+  #       entity_id: binary_sensor.shelly_shsw_1_500291f04b24
+  #       state: 'on'
+  #     - service: switch.turn_on
+  #       data:
+  #           entity_id: switch.shelly_shsw_1_500291f04b24

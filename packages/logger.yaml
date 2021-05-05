@@ -1,0 +1,19 @@
+---
+# Example configuration.yaml entry
+logger:
+  default: info
+  logs:
+    # log level for HA core
+    homeassistant.core: fatal
+
+    # log level for MQTT integration
+    homeassistant.components.mqtt: warning
+
+    # log level for all python scripts
+    homeassistant.components.python_script: warning
+
+    # log level for a custom component
+    custom_components: debug
+
+    # log level for the `aiohttp` Python package
+    aiohttp: error

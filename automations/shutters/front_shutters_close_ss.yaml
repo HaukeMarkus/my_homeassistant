@@ -1,0 +1,15 @@
+---
+#########################################
+##   AUTOMATE ALL FRONT SHUTTERS       ##
+#########################################
+
+# Front shutters down @ sunset + offset
+alias: close_all_front_shutters_at_sunset
+trigger:
+  platform: sun
+  event: sunset
+  offset: "+00:30:00"
+action:
+- service: cover.close_cover
+  entity_id: group.g_shutters_front
+

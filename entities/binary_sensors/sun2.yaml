@@ -1,0 +1,9 @@
+---
+#
+# Binary sensor for sun2 platform 
+# see more on https://github.com/pnbruckner/ha-sun2
+#
+
+platform: sun2
+monitored_conditions:
+  - elevation

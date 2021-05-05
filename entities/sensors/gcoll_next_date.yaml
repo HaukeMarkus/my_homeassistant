@@ -1,0 +1,74 @@
+---
+###############################################
+##
+## ics Garbage collection config and sensors
+## Customized for local read ;-)
+###############################################
+
+platform: template
+sensors:
+  gcoll_next_date:
+    icon_template: mdi:truck  
+    friendly_name_template: >
+          {% set r1 = state_attr('sensor.ics_1', 'remaining') %}
+          {% set n1 = state_attr('sensor.ics_1', 'friendly_name') %}
+          {% set r2 = state_attr('sensor.ics_2', 'remaining') %}
+          {% set n2 = state_attr('sensor.ics_2', 'friendly_name') %}
+          {% set r3 = state_attr('sensor.ics_3', 'remaining') %}
+          {% set n3 = state_attr('sensor.ics_3', 'friendly_name') %}
+          {% set r4 = state_attr('sensor.ics_4', 'remaining') %}
+          {% set n4 = state_attr('sensor.ics_4', 'friendly_name') %}
+          {% set min = (r1, r2, r3, r4) | min %}
+          {% set remainings = (r1, r2, r3, r4) %}
+          {% set types = (n1, n2, n3, n4) %}
+
+          {%- for r in remainings -%}
+            {%- if (r == min) -%}
+              {{ types[loop.index0]}}
+              {%- if not loop.last %}/ {% endif -%}
+            {% endif -%}
+          {% endfor %}
+    value_template: >-
+        {% set r1 = state_attr('sensor.ics_1', 'remaining') %}
+        {% set n1 = state_attr('sensor.ics_1', 'friendly_name') %}
+        {% set r2 = state_attr('sensor.ics_2', 'remaining') %}
+        {% set n2 = state_attr('sensor.ics_2', 'friendly_name') %}
+        {% set r3 = state_attr('sensor.ics_3', 'remaining') %}
+        {% set n3 = state_attr('sensor.ics_3', 'friendly_name') %}
+        {% set r4 = state_attr('sensor.ics_4', 'remaining') %}
+        {% set n4 = state_attr('sensor.ics_4', 'friendly_name') %}
+        {% set min = (r1, r2, r3, r4) | min %}
+
+        {% if min == 0 %} Heute {% endif %}
+        {% if min == 1 %} Morgen {% endif %}
+        {%- if min > 1 %} in {{min}} Tagen {% endif -%}
+        
+
+    attribute_templates:
+      type: >-
+        {% set r1 = state_attr('sensor.ics_1', 'remaining') %}
+        {% set n1 = state_attr('sensor.ics_1', 'friendly_name') %}
+        {% set r2 = state_attr('sensor.ics_2', 'remaining') %}
+        {% set n2 = state_attr('sensor.ics_2', 'friendly_name') %}
+        {% set r3 = state_attr('sensor.ics_3', 'remaining') %}
+        {% set n3 = state_attr('sensor.ics_3', 'friendly_name') %}
+        {% set r4 = state_attr('sensor.ics_4', 'remaining') %}
+        {% set n4 = state_attr('sensor.ics_4', 'friendly_name') %}
+        {% set min = (r1, r2, r3, r4) | min %}
+        {% set remainings = (r1, r2, r3, r4) %}
+        {% set types = (n1, n2, n3, n4) %}
+
+        {% for r in remainings %}
+          {% if (r == min) %}
+            {{ types[loop.index0]}}
+            {%- if not loop.last %}/ {% endif -%}
+          {% endif -%}
+        {% endfor %}
+      days: >-
+        {% set r1 = state_attr('sensor.ics_1', 'remaining') %}
+        {% set r2 = state_attr('sensor.ics_2', 'remaining') %}
+        {% set r3 = state_attr('sensor.ics_3', 'remaining') %}
+        {% set r4 = state_attr('sensor.ics_4', 'remaining') %}
+        {% set min = (r1, r2, r3, r4) | min %}
+
+        {{min}}

@@ -1,0 +1,16 @@
+---
+###############################################
+##
+## ics Garbage collection config and sensors
+## Customized for local read ;-)
+###############################################
+
+platform: ics
+id: 1
+name: Papier
+url: !secret gcollection_calendar
+startswith: Altpapier
+timeformat: "%d.%m.%Y"
+lookahead: 30
+icon: mdi:package-variant
+

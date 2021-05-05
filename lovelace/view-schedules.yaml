@@ -1,0 +1,46 @@
+
+title: Schalter
+icon: mdi:lightbulb-multiple-outline
+path: switches
+cards:
+  #
+  # COMPUTER
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: >
+          ## Schalter
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: group.glights_xmas
+                name: Alle Sterne schalten
+                icon: mdi:star-face
+              - entity: switch.licht_flur_eg
+                name: Stern Flur
+                icon: mdi:star-outline
+              - entity: switch.fritzschalter
+                name: Stern WZ
+                icon: mdi:star-outline
+              - entity: light.shelly_shsw_1_1179e3
+                name: Stern Garten
+                icon: mdi:star-outline
+            
+              
+      - type: markdown
+        content: >
+          ## Timer Weihnachten
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            entities:
+            - input_boolean.xmas_toggle
+            
+      - type: horizontal-stack
+        cards:
+          - type: entities
+            entities:
+            - input_datetime.xmas_light_start_time
+            - input_datetime.xmas_light_end_time
+          

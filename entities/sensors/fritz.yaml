@@ -1,0 +1,23 @@
+---
+# Fritz.Box sensors platform.
+# Has different sensors to read
+#
+# This is usefull for displaying and automation purposes.
+#
+platform: template
+sensors:
+  # fritzschalter_verbrauch:
+  #   entity_id: []
+  #   friendly_name: "Aktueller Verbrauch Klavierschalter"
+  #   value_template: '{{ states.switch.fritzschalter.attributes["current_consumption"] | float }}'
+  #   unit_of_measurement: 'W'
+  fritzschalter_gesamtverbrauch:
+    entity_id: []
+    friendly_name: "Gesamt Verbrauch Klavierschalter"
+    value_template: '{{ states.switch.fritzschalter.attributes["total_consumption"] | float }}'
+    unit_of_measurement: 'kWh'
+  fritzschalter_temperatur:
+    entity_id: []
+    friendly_name: "Temperatur Wohnzimmer"
+    value_template: '{{ states.switch.fritzschalter.attributes["temperature"] | float }}'
+    unit_of_measurement: '°C' 

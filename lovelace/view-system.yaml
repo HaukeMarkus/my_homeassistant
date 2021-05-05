@@ -1,0 +1,111 @@
+
+title: Systemübersicht
+icon: mdi:desktop-tower-monitor
+path: system
+cards:
+  #
+  # COMPUTER
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: >
+          ## Computer
+      - type: horizontal-stack
+        cards:
+          - type: entity-button
+            entity: script.restart_ha
+            name: Neustart
+            tap_action:
+              action: toggle
+          - type: entity-button
+            entity: script.reload_automations
+            name: Automationen laden
+            tap_action:
+              action: toggle              
+      #
+      # Internet speeds Stats
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: >
+          ## Internet Geschwindigkeit 
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            name: Ping
+            entities:
+              - sensor.speedtest_ping
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+          - type: custom:mini-graph-card
+            name: Down
+            entities:
+              - sensor.speedtest_download
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+          - type: custom:mini-graph-card
+            name: Up
+            entities:
+              - sensor.speedtest_upload
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+
+      #
+      # PI Stats
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: >
+          ## PI Info 
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            name: PI CPU Last
+            entities:
+              - sensor.processor_use
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+          - type: custom:mini-graph-card
+            name: PI CPU TEMP
+            entities:
+              - sensor.cputemperature
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+          - type: custom:mini-graph-card
+            name: PI Last letzte 5 Min.
+            entities:
+              - sensor.load5mperc
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+
+
+      #
+      # Synology Stats
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: >
+          ## Synology Info
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            name: Synology CPU Last
+            entities:
+              - sensor.synology_cpu_load_total
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+          - type: custom:mini-graph-card
+            name: Synology Disk TEMP
+            entities:
+              - sensor.synology_maximum_disk_temp_volume_2
+            line_color: '#4481eb'
+            line_width: 8
+            font_size: 65
+         

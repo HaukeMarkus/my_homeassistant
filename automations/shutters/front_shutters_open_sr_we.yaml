@@ -1,0 +1,17 @@
+---
+#########################################
+##   AUTOMATE ALL FRONT SHUTTERS       ##
+#########################################
+
+# Front shutters down @ sunset + offset
+alias: open_all_front_shutters_at_sunrise_weekends
+trigger:
+  platform: time
+  at: "09:00:00"
+condition:
+  condition: state
+  entity_id: binary_sensor.workday_sensor
+  state: "off"
+action:
+- service: cover.open_cover
+  entity_id: group.g_shutters_front

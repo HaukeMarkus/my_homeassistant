@@ -1,0 +1,15 @@
+---
+#
+#
+# https://www.home-assistant.io/integrations/binary_sensor.template/
+#
+platform: template
+sensors:
+  garagedoor_status:
+    friendly_name_template: >-
+      {% if state_attr('switch.shelly_garage','switch') == true %}
+        Garage offen
+      {% else %}
+        Garage geschlossen
+      {% endif %}
+    value_template: "{{ state_attr('switch.shelly_garage','switch') }}"

@@ -1,0 +1,7 @@
+gLights_xmas:
+  name: Weihnachtsgeräte
+  entities:
+    - switch.fritzschalter
+    - light.shelly_shsw_1_1179e3
+    - switch.licht_flur_eg
+  icon: mdi:lightbulb-group-outline 

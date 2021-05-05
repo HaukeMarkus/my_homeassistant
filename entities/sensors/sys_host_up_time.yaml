@@ -1,0 +1,11 @@
+---
+#
+# System-Info: Host uptime in seconds
+#
+#
+platform: command_line
+name: host_uptime_in_seconds
+command: "awk '{print $1}' /proc/uptime"
+unit_of_measurement: "sec"
+value_template: '{{ value|round }}'
+

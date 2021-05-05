@@ -1,0 +1,18 @@
+---
+#################################
+##    SHUTTER AUTOMATIONS      ##
+#################################
+
+# Kitchen up
+alias: open_kitchen_shutters_at_sunrise_weekends
+trigger:
+  platform: time
+  at: "09:00:00"
+condition:
+  condition: state
+  entity_id: binary_sensor.workday_sensor
+  state: "off"
+action:
+  - service: cover.open_cover
+    entity_id:
+      - cover.shelly_shsw_25_rolladen_kueche

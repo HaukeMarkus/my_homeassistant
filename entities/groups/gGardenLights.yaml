@@ -1,0 +1,23 @@
+---
+  #
+  # Groups of garden lights
+  #
+  g_gardenlights_left:
+    name: Lichter links
+    entities:
+      - light.shelly_shsw_1_1179e3
+      - light.shelly_shsw_1_111a7a
+  
+  g_gardenlights_right:
+    name: Lichter rechts
+    entities:
+      - light.shelly_shsw_1_f4cfa2768401
+      - light.shelly_shsw_1_500291f04b61
+
+  g_gardenlights_all:
+    name: Alle Gartenlichter
+    entities:
+      - light.shelly_shsw_1_1179e3
+      - light.shelly_shsw_1_111a7a
+      - light.shelly_shsw_1_f4cfa2768401
+      - light.shelly_shsw_1_500291f04b61

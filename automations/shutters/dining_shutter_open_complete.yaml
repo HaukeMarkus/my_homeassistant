@@ -1,0 +1,13 @@
+---
+# Automatic shutter movement
+#
+# Dining up lately weekdays
+#
+
+alias: open_dining_shutters_completely
+trigger:
+  platform: time
+  at: "10:15:00"
+action:
+  - service: cover.open_cover
+    entity_id: cover.shelly_shsw_25_rolladen_esszimmer

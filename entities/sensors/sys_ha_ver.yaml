@@ -1,0 +1,15 @@
+---
+#
+# System-Info:HA Version
+#
+#
+platform: template
+sensors:
+  ha_version:
+    value_template: "{%- if states.sensor.ha_release.state == states.sensor.ha_release_local.state-%} Aktuell {% else %}{{states.sensor.ha_release.state}} verfügbar! {% endif%}"
+    icon_template: >-
+      {% if states.sensor.ha_release.state == states.sensor.ha_release_local.state %}
+        mdi:checkbox-marked
+      {% else %}
+        mdi:checkbox-blank-outline
+      {% endif %}

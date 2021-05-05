@@ -1,0 +1,40 @@
+---
+#
+#
+# https://community.home-assistant.io/t/weather-summary-icon-status/627/39
+#
+platform: template
+sensors:
+  irrigation_weather_outlook:
+    friendly_name: "mdi Real Weather Icon"
+    icon_template: >-
+        {% if is_state("sensor.dark_sky_icon","clear-day") %} mdi:weather-sunny 
+        {% elif is_state("sensor.dark_sky_icon","clear-night") %} mdi:weather-night 
+        {% elif is_state("sensor.dark_sky_icon","rain") %} mdi:weather-rainy
+        {% elif is_state("sensor.dark_sky_icon","snow") %} mdi:weather-snowy
+        {% elif is_state("sensor.dark_sky_icon","fog") %} mdi:weather-fog
+        {% elif is_state("sensor.dark_sky_icon","sleet") %} mdi:weather-partly-snowy-rainy
+        {% elif is_state("sensor.dark_sky_icon","wind") %} mdi:weather-windy
+        {% elif is_state("sensor.dark_sky_icon","cloudy") %} mdi:weather-cloudy
+        {% elif is_state("sensor.dark_sky_icon","partly-cloudy-day") %} mdi:weather-partly-cloudy
+        {% elif is_state("sensor.dark_sky_icon","partly-cloudy-night") %} mdi:weather-night-partly-cloudy
+        {% elif is_state("sensor.dark_sky_icon","hail") %} mdi:weather-hail
+        {% elif is_state("sensor.dark_sky_icon","lightning") %} mdi:weather-lightning
+        {% elif is_state("sensor.dark_sky_icon","thunderstorm") %} mdi:weather-lightning-rainy
+        {% endif %}
+    # entity_id: sensor.dark_sky_icon
+    value_template: >-
+        {% if is_state("sensor.dark_sky_icon","clear-day") %} Klarer Tag 
+        {% elif is_state("sensor.dark_sky_icon","clear-night") %} Klare Nacht 
+        {% elif is_state("sensor.dark_sky_icon","rain") %} Regen
+        {% elif is_state("sensor.dark_sky_icon","snow") %} Schnee
+        {% elif is_state("sensor.dark_sky_icon","fog") %} Nebel
+        {% elif is_state("sensor.dark_sky_icon","sleet") %} Schneeregen
+        {% elif is_state("sensor.dark_sky_icon","wind") %} Windig
+        {% elif is_state("sensor.dark_sky_icon","cloudy") %} Wolkig
+        {% elif is_state("sensor.dark_sky_icon","partly-cloudy-day") %} Teilweise bewölkt Tag
+        {% elif is_state("sensor.dark_sky_icon","partly-cloudy-night") %} Teilweise bewölkt Nacht
+        {% elif is_state("sensor.dark_sky_icon","hail") %} Hagel
+        {% elif is_state("sensor.dark_sky_icon","lightning") %} Blitz
+        {% elif is_state("sensor.dark_sky_icon","thunderstorm") %} Gewitter
+        {% endif %}

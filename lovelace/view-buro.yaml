@@ -1,0 +1,21 @@
+title: Büro
+icon: 'mdi:laptop-mac'
+path: buro
+badges:
+  - media_player.buro
+cards:
+  - type: custom:mini-media-player
+    entity: media_player.buro
+    artwork: cover
+    hide:
+      power: true
+      icon: true
+      source: false
+    speaker_group:
+      platform: sonos
+      show_group_count: true
+      entities:
+        - entity_id: media_player.buro
+          name: Büro
+        - entity_id: media_player.wohnzimmer
+          name: Wohnzimmer

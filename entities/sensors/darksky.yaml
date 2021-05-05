@@ -1,0 +1,37 @@
+---
+# Darksky sensor platform.
+# Has different conditions to monitor
+#
+# This is usefull for displaying and automation purposes.
+#
+platform: darksky
+api_key: !secret darksky_api_key
+language: de # take German translation of icon codes
+forecast:
+  - 1
+monitored_conditions:
+  - icon
+  - summary
+  - nearest_storm_distance
+  - nearest_storm_bearing
+  - humidity
+  - temperature
+  - temperature_high
+  - temperature_low
+  - apparent_temperature
+  - apparent_temperature_high
+  - apparent_temperature_low
+  - wind_speed
+  - wind_bearing
+  - precip_type
+  - precip_probability
+  - precip_accumulation
+  - precip_intensity
+  - precip_intensity_max
+  - uv_index
+  - daily_summary
+  - minutely_summary
+  - hourly_summary
+  - pressure
+  - visibility
+scan_interval: 01:00:00

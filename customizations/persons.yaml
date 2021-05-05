@@ -1,0 +1,23 @@
+---
+#
+# Customizes the persons in Home Assistant
+#
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+#
+person.britta:
+  entity_picture: "/local/people/britta.png"
+person.emma:
+  entity_picture: "/local/people/emma.png"
+person.hauke:
+  entity_picture: "/local/people/hauke.png"
+person.jana:
+  entity_picture: "/local/people/jana.png"
+
+device_tracker.piz_palu:
+  entity_picture: "/local/people/hauke.png"
+device_tracker.brittas_iphone:
+  entity_picture: "/local/people/britta.png"
+device_tracker.brooke:
+  entity_picture: "/local/people/jana.png"
+device_tracker.iphone_7_von_emma:
+  entity_picture: "/local/people/emma.png"

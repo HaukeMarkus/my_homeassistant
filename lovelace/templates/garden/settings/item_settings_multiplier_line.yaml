@@ -1,0 +1,101 @@
+# lovelace_gen
+
+#==================
+#=== SETTINGS LINE
+#==================
+type: custom:button-card
+entity: {{ entity }}
+show_state: true
+name: {{ name }}
+icon: {{ icon }}
+show_label: true
+label: {{ label }}
+size: 30%
+tap_action:
+  action: call-service
+  service: browser_mod.popup
+  service_data:
+    title: " &nbsp \U00002139 &nbsp &nbsp WETTER ANPASSUNGEN"
+    hide_header: true
+    card:
+      type: markdown
+      content: >
+        ### Regen-Multiplikator
+        
+        Dieser Multiplikator wird die Bewässerungszeit proportional verringern
+        basierend auf der Differenz zwischen der Niederschlagsschwelle und der Menge von
+        Regen in den letzten Tagen.
+        
+        Wenn die Schwelle erreicht ist, wird er ganz aufhören.
+
+        ---
+
+        ### Temperatur-Multiplikator
+
+        Dieser Multiplikator erhöht oder verringert die Bewässerungszeit proportional
+        basierend auf der Differenz zwischen der Temperaturschwelle und dem 
+        durchschnittlich hohe Temperatur in den letzten Tagen.
+
+
+        Sie wird berechnet als Hochtemperatur geteilt durch die Basislinientemperatur.
+
+
+        Wenn zum Beispiel die Basislinientemperatur auf 25 Grad eingestellt ist und die
+        Die Durchschnittstemperatur lag bei 30 Grad, die Anpassung wird plus 20% betragen.
+
+
+        Ebenso, wenn die Durchschnittstemperatur nur 20 Grad betrug, beträgt der
+        Die Anpassung wird minus 20% betragen.
+
+      # style: >
+      #   ha-card {
+      #     border-radius: 0em 0em 1em 1em
+      #   }
+    deviceID:
+      - this
+    # style:
+    #   font-family: >
+    #     [[[
+    #       return states['input_text.irrigation_ui_font_family'].state
+    #     ]]]
+    #   box-shadow: 0em 0em 0.5em
+    #   border-radius: 1em
+    #   overflow: hidden
+    #   opacity: 0.9
+
+    style:
+      $: |
+        .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+          border-radius: 1em;
+          box-shadow: 0em 0em 0.5em;
+        }
+      .: |
+        :host {
+          --mdc-theme-surface: var(--paper-dialog-background-color);
+          --ha-card-background: var(--paper-dialog-background-color);
+          --secondary-background-color: var(--paper-dialog-background-color);
+          opacity: 0.9;
+        }
+
+styles:
+  grid:
+    - grid-template-areas: >
+        [[[
+          if ('{{ label }}' == '')
+            return '"i n s"  "i n s"';
+          else
+            return '"i n s"  "i l s"';
+        ]]]
+    - grid-template-columns: 15% auto 15%
+    - grid-template-rows: min-content min-content
+  card:
+    - font-family: "[[[ return states['input_text.irrigation_ui_font_family'].state ]]]"
+    - font-size: 15px
+    - padding: 0em 0em 0.5em 0em
+    - background: none
+    - box-shadow: none
+  name: 
+    - justify-self: start
+  label:
+    - justify-self: start
+    - color: var(--secondary-text-color)

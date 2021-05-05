@@ -1,0 +1,31 @@
+---
+# This is actually just a bootstrap for my Lovelace configuration.
+
+# It loads all resources for Lovelace dynamically from subfolders
+# inside the `lovelace/resources` directory.
+#
+# Views are actually include one by one, this to guarentee the order of
+# the tabs of the view in the UI.
+#
+
+title: 4Sterne
+#
+custom_header:
+  compact_mode: true
+  background: var(--app-header-background-color)
+  elements_color: var(--app-header-text-color)
+  active_tab_color: var(--state-icon-active-color)
+  tab_indicator_color: var(--state-icon-active-color)
+
+resources: !include lovelace/resources.yaml
+views:
+  - !include lovelace/view-overview.yaml
+  - !include lovelace/view-climate.yaml
+  - !include lovelace/view-windows.yaml
+  - !include lovelace/view-media.yaml
+  - !include lovelace/view-schedules.yaml
+  - !include lovelace/view-garden.yaml
+  - !include lovelace/view-irrigation.yaml
+  - !include lovelace/view-mower.yaml
+  #  - !include lovelace/view-system.yaml
+  - !include lovelace/view-homekit_test.yaml

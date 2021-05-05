@@ -1,0 +1,154 @@
+#===================
+#=== Smartweather sersor handling
+#===================
+
+#===================
+#=== Input Booleans
+#===================
+input_boolean:
+  #================================================
+  #=== Indicate which stations to use for rainfall
+  #================================================
+  smartweather_rainfall_use_location_1: 
+    name: Location 1
+    icon: mdi:apple-safari
+    initial: true
+  smartweather_rainfall_use_location_2: 
+    name: Location 2
+    icon: mdi:apple-safari
+    initial: true
+
+
+#================
+#=== Input Texts
+#================
+input_text:
+  #=== Smartweather Location Codes
+  smartweather_location_code1:
+    min: 0
+    max: 7
+    initial: !secret smartweather_location_code_1
+
+  smartweather_location_code2:
+    min: 0
+    max: 7
+    initial: !secret smartweather_location_code_2
+
+
+
+  #=== Smartweather Location Names
+  smartweather_location_name1:
+    min: 0
+    max: 30
+    initial: !secret smartweather_location_name_1
+
+  smartweather_location_name2:
+    min: 0
+    max: 30
+    initial: !secret smartweather_location_name_2
+
+
+
+#============
+#=== Sensors
+#============
+sensor:
+  #=== [REPEAT THIS FOR EACH STATION]
+  - platform: rest
+    resource: !secret smartweather_resource_1
+    name: smartweather_1
+    value_template: >
+      {{ value_json.station_id }}
+    json_attributes:
+      - status
+      - station_units
+      - obs    
+
+  - platform: rest
+    resource: !secret smartweather_resource_2
+    name: smartweather_2
+    value_template: >
+      {{ value_json.station_id }}
+    json_attributes:
+      - status
+      - station_units
+      - obs    
+
+
+  #=== Average Smartweather Rain Today
+  - platform: min_max
+    type: mean
+    name: Smartweather Average Rain today
+    entity_ids:
+      - sensor.smartweather_1_rain_today
+      - sensor.smartweather_2_rain_today
+
+  - platform: min_max
+    type: mean
+    name: Smartweather Average Rain yesterday
+    entity_ids:
+      - sensor.smartweather_1_rain_yesterday
+      - sensor.smartweather_2_rain_yesterday
+
+
+  - platform: template
+    sensors:
+      #============================
+      #=== SmartWeather Rain Today 
+      #============================
+      #=== [REPEAT THIS FOR EACH STATION]
+      smartweather_1_rain_today:
+        friendly_name: SmartWeather (id 1) Rain Today
+        value_template: >
+          {% set obs = state_attr('sensor.smartweather_1', 'obs') %}
+          {% if is_state('input_boolean.smartweather_rainfall_use_location_1', 'off') %}
+            unknown
+          {% elif obs is sequence and obs|length > 0 and obs[0].precip_accum_local_day is defined %}
+            {{ obs[0].precip_accum_local_day }}
+          {% else %}
+            unknown
+          {% endif %}
+        unit_of_measurement: mm
+
+      smartweather_2_rain_today:
+        friendly_name: SmartWeather (id 2) Rain Today
+        value_template: >
+          {% set obs = state_attr('sensor.smartweather_2', 'obs') %}
+          {% if is_state('input_boolean.smartweather_rainfall_use_location_2', 'off') %}
+            unknown
+          {% elif obs is sequence and obs|length > 0 and obs[0].precip_accum_local_day is defined %}
+            {{ obs[0].precip_accum_local_day }}
+          {% else %}
+            unknown
+          {% endif %}
+        unit_of_measurement: mm
+
+
+
+      smartweather_1_rain_yesterday:
+        friendly_name: SmartWeather (id 1) Rain Yesterday
+        value_template: >
+          {% set obs = state_attr('sensor.smartweather_1', 'obs') %}
+          {% if is_state('input_boolean.smartweather_rainfall_use_location_1', 'off') %}
+            unknown
+          {% elif obs is sequence and obs|length > 0 and obs[0].precip_accum_local_yesterday is defined %}
+            {{ obs[0].precip_accum_local_yesterday }}
+          {% else %}
+            unknown
+          {% endif %}
+        unit_of_measurement: mm
+
+      smartweather_2_rain_yesterday:
+        friendly_name: SmartWeather (id 2) Rain Yesterday
+        value_template: >
+          {% set obs = state_attr('sensor.smartweather_2', 'obs') %}
+          {% if is_state('input_boolean.smartweather_rainfall_use_location_2', 'off') %}
+            unknown
+          {% elif obs is sequence and obs|length > 0 and obs[0].precip_accum_local_yesterday is defined %}
+            {{ obs[0].precip_accum_local_yesterday }}
+          {% else %}
+            unknown
+          {% endif %}
+        unit_of_measurement: mm
+
+

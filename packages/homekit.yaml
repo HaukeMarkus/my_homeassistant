@@ -1,0 +1,58 @@
+---
+# The HomeKit component allows you to forward entities from Home Assistant
+# to Apple HomeKit, so they can be controlled from Apple’s Home app and Siri.
+#
+# https://www.home-assistant.io/integrations/homekit
+#
+homekit:
+  # Start the HomeKit Server automatically.
+  # I have a Z-Wave network, but since Home Assistant restores entities,
+  # we don't have to wait for it (like we did in the past).
+  auto_start: true
+
+  # The default: "Home Assistant Bridge", I like it to be just "Home Assistant"
+  name: "4STERNE"
+
+  pincode: 123-45-678
+
+  # Configuration for specific entities. Allows customization of names and types
+  # These are imported from another folder, to decouple them from the packages.
+  entity_config: !include_dir_named ../assistants/siri
+
+  # Filters for entities to be included / excluded from HomeKit.
+  filter:
+    include_entities:
+      - switch.fritzschalter
+      - switch.irrigation_garden_zone1
+      - switch.irrigation_garden_zone2
+      - switch.irrigation_garden_zone3
+      - switch.irrigation_garden_zone4
+      - cover.shelly_shsw_25_687819
+      - cover.shelly_shsw_25_687999
+      - cover.shelly_shsw_25_6919b1
+      - cover.shelly_shsw_25_6919b1
+      - cover.shelly_shsw_25_c46c5c
+      - cover.garage
+      - light.shelly_shsw_1_111a7a
+      - light.shelly_shsw_1_1179e3
+      - light.shelly_shsw_1_500291f04b61
+      - light.shelly_shsw_1_f4cfa2768401
+      - light.shelly_shdm_2_d8bfc019d0d9
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_humidity
+      - sensor.fritzschalter_temperatur
+      - sensor.shelly_shht_1_f03c8b_humidity
+      - sensor.shelly_shht_1_f03c8b_temperature
+      - sensor.shelly_shht_1_f05641_humidity
+      - sensor.shelly_shht_1_f05641_temperature
+
+      # - switch.shelly_shsw_1_111a7a
+      # - cover.garage
+      # # Temp Büro
+      # - sensor.shelly_shht_1_f05641_temperature
+      # # Temp OG
+      # - sensor.shelly_shht_1_f03c8b_temperature
+
+      
+      
+      # - climate.bedroom_master

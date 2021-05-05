@@ -1,0 +1,92 @@
+
+#==========================
+#=== SMARTWEATHER STATIONS
+#==========================
+type: conditional
+conditions:
+  - entity: input_boolean.irrigation_show_smartweather_stations
+    state: 'on'
+card:
+  type: custom:hui-element
+  card_type: horizontal-stack
+  cards:
+    #================================
+    #=== SMARTWEATHER STATIONS TITLE
+    #================================
+    - type: custom:button-card
+      name: SMARTWEATHER<br>STATIONEN
+      styles:
+        card:
+          - font-size: 11px
+          - font-family: >
+              [[[
+                return states['input_text.irrigation_ui_font_family'].state
+              ]]]
+          - background: none
+          - box-shadow: none
+          - color: var(--secondary-text-color)
+          - margin-top: 0.5em
+      tap_action:
+        action: call-service
+        service: browser_mod.popup
+        service_data:
+          title: Smartweather Regen
+          hide_header: true
+          card:
+            type: markdown
+            content: >
+              {% set id1 = states('input_text.smartweather_location_code1') %}
+              {% set id2 = states('input_text.smartweather_location_code2') %}
+
+              {% set name1 = states('input_text.smartweather_location_name1') %}
+              {% set name2 = states('input_text.smartweather_location_name2') %}
+
+              {% set today1 = states('sensor.smartweather_1_rain_today') %}
+              {% set yesterday1 = states('sensor.smartweather_1_rain_yesterday') %}
+              {% set today2 = states('sensor.smartweather_2_rain_today') %}
+              {% set yesterday2 = states('sensor.smartweather_2_rain_yesterday') %}
+
+
+              Station | Heute (mm) | Gestern (mm)
+                ---|:---:|:---:
+              {{ id1 }}: {{ name1 }} | {{ today1 | round(1) }} | {{ yesterday1 | round(1) }}
+
+              {{ id2 }}: {{ name2 }} | {{ today2 | round(1) }} | {{ yesterday2 | round(1) }}
+
+            # style: >
+            #   ha-card {
+            #     border-radius: 0em 0em 1em 1em
+            #   }
+          deviceID:
+            - this
+          # style:
+          #   font-family: "[[[ return states['input_text.irrigation_ui_font_family'].state ]]]"
+          #   box-shadow: 0em 0em 0.5em
+          #   border-radius: 1em
+          #   overflow: hidden
+          #   opacity: 0.9
+
+          style:
+            $: |
+              .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+                border-radius: 1em;
+                box-shadow: 0em 0em 0.5em;
+              }
+            .: |
+              :host {
+                --mdc-theme-surface: var(--paper-dialog-background-color);
+                --ha-card-background: var(--paper-dialog-background-color);
+                --secondary-background-color: var(--paper-dialog-background-color);
+                opacity: 0.9;
+              }
+  
+    #========================
+    #=== STATIONS TO INCLUDE
+    #========================
+    - !include
+      - item_settings_smartweather_check_box.yaml
+      - entity: input_boolean.smartweather_rainfall_use_location_1
+
+    - !include
+      - item_settings_smartweather_check_box.yaml
+      - entity: input_boolean.smartweather_rainfall_use_location_2

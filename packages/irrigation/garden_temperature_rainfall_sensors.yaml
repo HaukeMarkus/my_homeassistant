@@ -1,0 +1,50 @@
+---
+# ============================================#
+# === Sensors to determine historic rain data
+# --- Looks back up to 4 days in the past  ---
+# ============================================#
+#
+
+sensor:
+- platform: sql
+  queries:
+    - name: temp minus1
+      query: "SELECT * FROM states WHERE entity_id = 'sensor.dark_sky_temperature' ORDER BY ABS(strftime('%s', created) - strftime('%s', datetime('now'), '-1 day')) LIMIT 1;"
+      column: 'state'
+      unit_of_measurement: "°C"
+
+    - name: temp minus2
+      query: "SELECT * FROM states WHERE entity_id = 'sensor.dark_sky_temperature' ORDER BY ABS(strftime('%s', created) - strftime('%s', datetime('now'), '-2 day')) LIMIT 1;"
+      column: 'state'
+      unit_of_measurement: "°C"
+
+    - name: temp minus3
+      query: "SELECT * FROM states WHERE entity_id = 'sensor.dark_sky_temperature' ORDER BY ABS(strftime('%s', created) - strftime('%s', datetime('now'), '-3 day')) LIMIT 1;"
+      column: 'state'
+      unit_of_measurement: "°C"
+
+    - name: temp minus4
+      query: "SELECT * FROM states WHERE entity_id = 'sensor.dark_sky_temperature' ORDER BY ABS(strftime('%s', created) - strftime('%s', datetime('now'), '-4 day')) LIMIT 1;"
+      column: 'state'
+      unit_of_measurement: "°C"
+
+    # determine historic rain data
+    - name:  irrigation rain minus 1
+      query: "SELECT * FROM states WHERE entity_id = 'sensor.dark_sky_precip_intensity' ORDER BY ABS(strftime('%s', created) - strftime('%s', datetime('now'), '-1 day')) LIMIT 1;"
+      column: 'state'
+      unit_of_measurement: "mm/h"
+
+    - name:  irrigation rain minus 2
+      query: "SELECT * FROM states WHERE entity_id = 'sensor.dark_sky_precip_intensity' ORDER BY ABS(strftime('%s', created) - strftime('%s', datetime('now'), '-2 day')) LIMIT 1;"
+      column: 'state'
+      unit_of_measurement: "mm/h"
+
+    - name:  irrigation rain minus 3
+      query: "SELECT * FROM states WHERE entity_id = 'sensor.dark_sky_precip_intensity' ORDER BY ABS(strftime('%s', created) - strftime('%s', datetime('now'), '-3 day')) LIMIT 1;"
+      column: 'state'
+      unit_of_measurement: "mm/h"
+
+    - name: irrigation rain minus 4
+      query: "SELECT * FROM states WHERE entity_id = 'sensor.dark_sky_precip_intensity' ORDER BY ABS(strftime('%s', created) - strftime('%s', datetime('now'), '-4 day')) LIMIT 1;"
+      column: 'state'
+      unit_of_measurement: "mm/h"

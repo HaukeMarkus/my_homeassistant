@@ -1,0 +1,75 @@
+
+#================
+#=== HELP BUTTON
+#================
+type: custom:button-card
+icon: mdi:information-outline
+show_name: false
+size: 100%
+styles:
+  card:
+    - background: none
+    # - height: 1.9em
+    - width: 1.9em
+    - box-shadow: none
+  icon:
+    - color: var(--accent-color)
+tap_action:
+  action: call-service
+  service: browser_mod.popup
+  service_data:
+    title: "\U00002139 INFO-BOX"
+    card:
+      type: markdown
+      content: >
+        Tippe auf eine Zyklus-Startzeit, um die Planzeit zu bearbeiten
+
+        Tippe auf die Kopfzeile eines Zyklus, um den Namen zu bearbeiten
+
+        Tippe auf eine Zone, um ihre Informationen zu bearbeiten
+
+        Wenn Du 'Testmodus' wählst, werden die Laufzeiten in Sekunden geändert.
+
+        z.B. wird eine Laufzeit von 5 Minuten 5 Sekunden lang laufen.
+
+        ---
+
+        ##### Anpassen der Dauer für das Wetter (experimentell)
+
+        Durch das Einschalten der Wetteranpassung wird die Bewässerungszeit auf der Grundlage der Temperatur angepasst
+        und/oder Niederschlag.
+
+
+        Siehe Einstellungen für REGENFALL & TEMPERATUR.
+
+      # style: >
+      #   ha-card {
+      #     border-radius: 0em 0em 1em 1em
+      #   }
+
+    deviceID:
+      - this
+    # style:
+    #   font-family: >
+    #     [[[
+    #       return states['input_text.irrigation_ui_font_family'].state
+    #     ]]]
+    #   font-size: 14px
+    #   box-shadow: 0em 0em 0.5em
+    #   border-radius: 1em
+    #   overflow: hidden
+    #   opacity: 0.9
+
+    style:
+      $: |
+        .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+          border-radius: 1em;
+          box-shadow: 0em 0em 0.5em;
+        }
+      .: |
+        :host {
+          --mdc-theme-surface: var(--paper-dialog-background-color);
+          --ha-card-background: var(--paper-dialog-background-color);
+          --secondary-background-color: var(--paper-dialog-background-color);
+          opacity: 0.9;
+        }

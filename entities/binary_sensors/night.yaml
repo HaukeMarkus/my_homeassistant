@@ -1,0 +1,11 @@
+---
+#
+#
+# https://www.home-assistant.io/integrations/binary_sensor.template/
+#
+platform: template
+sensors:
+  night:
+    friendly_name: "Night is on"
+    value_template: >-
+      {{ state_attr('sun.sun', 'elevation')|float <= 0 }}

@@ -1,0 +1,15 @@
+---
+
+############################################
+# This handles the loading of my weather platforms.
+#
+# https://www.home-assistant.io/integrations/weather/
+# The darksky platform uses the Dark Sky web service as a source for
+# meteorological data for your location.
+#
+# https://www.home-assistant.io/integrations/weather.darksky/
+# here: only configuration of component loaded by configuration.yaml > packages > weather
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key

@@ -1,0 +1,17 @@
+---
+# When the alarm gets armed...
+#
+# TManage Dining down
+#
+alias: close_dining_shutter_at_sunset
+trigger:
+  platform: sun
+  event: sunset
+  offset: "+00:30:00"
+condition:
+  condition: state
+  entity_id: binary_sensor.workday_sensor
+  state: "on"
+action:
+  - service: cover.close_cover
+    entity_id: cover.shelly_shsw_25_rolladen_esszimmer

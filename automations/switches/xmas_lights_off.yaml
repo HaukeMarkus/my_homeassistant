@@ -1,0 +1,20 @@
+---
+#################################
+##    SWITCH AUTOMATIONS       ##
+#################################
+
+# Piano light off    
+alias: switch_xmas_lights_eg_off
+trigger:
+  platform: time
+  at: input_datetime.xmas_light_end_time
+condition:
+    - condition: state
+      entity_id: input_boolean.xmas_toggle
+      state: 'on'
+action:
+  - service: switch.turn_off
+    entity_id: 
+      - switch.licht_flur_eg
+  - service: input_datetime.set_datetime
+    entity_id: input_datetime.xmas_light_end_time

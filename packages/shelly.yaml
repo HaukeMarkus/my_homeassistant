@@ -1,0 +1,10 @@
+---
+############################################
+#
+# Shelly config
+# https://github.com/StyraHem/ShellyForHASS
+#
+shelly:
+  cloud_auth_key: !secret shelly_cloud_key
+  cloud_server: !secret shelly_cloud_server 
+  discovery: true  #add all devices (default)

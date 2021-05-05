@@ -1,0 +1,7 @@
+#=============================
+#=== XMas toggle
+#=============================
+xmas_toggle:
+  name: Weihnachtbeleutchtung AN/AUS
+  icon: mdi:toggle-switch
+  initial: false

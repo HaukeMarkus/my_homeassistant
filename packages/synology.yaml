@@ -1,0 +1,12 @@
+---
+###############################################################################
+#   @author         :   Hauke Kroeger
+#   @date           :   15/04/2020
+#   @description    :   Sensors for Synology NAS
+###############################################################################
+
+# Synology
+synology_dsm:
+  host: !secret sensor_synology_host
+  username: !secret sensor_synology_username
+  password: !secret sensor_synology_password

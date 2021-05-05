@@ -1,0 +1,391 @@
+# Worx Landroid (M500 WR141E) package
+# https://github.com/Barma-lej/halandroid
+# Based on Landroid Cloud by @MTrab
+# https://github.com/MTrab/landroid_cloud
+
+# Cloud #############################################################
+landroid_cloud:
+  email: !secret landroid_mail
+  password: !secret landroid_pass
+
+# Recorder ##########################################################
+recorder:
+  exclude:
+    entities:
+      - sensor.landroid_ip
+      - sensor.landroid_sn
+      - sensor.landroid_mac
+      - sensor.landroid_bat
+      - sensor.landroid_lastupdate
+      - input_number.landroid_raindelay
+      - input_number.landroid_timeextension
+      - input_boolean.landroid_sched_settings
+      - input_boolean.landroid_info_toggle
+      - automation.landroid_notify_status
+      - automation.landroid_notify_error
+      - automation.landroid_sync_values
+      - script.landroid_start
+      - script.landroid_stop
+      - script.landroid_pause
+      - script.landroid_set_config
+
+# Logbook ###########################################################
+logbook:
+  exclude:
+    entities:
+      - sensor.landroid_ip
+      - sensor.landroid_sn
+      - sensor.landroid_mac
+      - sensor.landroid_bat
+      - sensor.landroid_lastupdate
+      - input_number.landroid_raindelay
+      - input_number.landroid_timeextension
+      - input_boolean.landroid_sched_settings
+      - input_boolean.landroid_info_toggle
+      - automation.landroid_notify_status
+      - automation.landroid_notify_error
+      - automation.landroid_sync_values
+      - script.landroid_start
+      - script.landroid_stop
+      - script.landroid_pause
+      - script.landroid_set_config
+
+# Switch ############################################################
+switch:
+  - platform: template
+    switches:
+      landroid_mowing:
+        value_template: "{{ is_state_attr('sensor.landroid_m_status', 'status_id', 7) }}"
+        turn_on:
+          service: script.landroid_start
+        turn_off:
+          service: script.landroid_stop
+
+# Sensor ############################################################
+# sensor.landroid_m_battery
+# sensor.landroid_m_error
+# sensor.landroid_m_status
+
+sensor:
+  - platform: template
+    sensors:
+
+# Info ############
+      landroid_ip:
+        friendly_name: IP Address
+        value_template: !secret landroid_ip
+        icon_template: mdi:ip-network
+
+      landroid_sn:
+        friendly_name: Serial number
+        value_template: !secret landroid_sn
+        icon_template: mdi:numeric
+
+      landroid_mac:
+        friendly_name: MAC-Address
+        value_template: !secret landroid_mac
+        icon_template: mdi:barcode
+
+      landroid_bat:
+        friendly_name: Battery level
+        value_template: >-
+          {% if is_state_attr('sensor.landroid_m_battery', 'charging', 1) -%}Charging
+          {%- else -%}Discharging
+          {%- endif %}
+        icon_template: >-
+          {% set level = states('sensor.landroid_m_battery') | float -%}
+          {%- if is_state_attr('sensor.landroid_m_battery', 'charging', 1) -%}
+            {%- if level > 99 -%}mdi:battery-charging-100
+            {%- elif level > 89 -%}mdi:battery-charging-90
+            {%- elif level > 79 -%}mdi:battery-charging-80
+            {%- elif level > 69 -%}mdi:battery-charging-70
+            {%- elif level > 59 -%}mdi:battery-charging-60
+            {%- elif level > 49 -%}mdi:battery-charging-50
+            {%- elif level > 39 -%}mdi:battery-charging-40
+            {%- elif level > 29 -%}mdi:battery-charging-30
+            {%- elif level > 19 -%}mdi:battery-charging-20
+            {%- elif level > 9 -%}mdi:battery-charging-10
+            {%- else -%}mdi:battery-charging-outline
+            {%- endif -%}
+          {%- else -%}
+            {%- if level > 99 -%}mdi:battery
+            {%- elif level > 89 -%}mdi:battery-90
+            {%- elif level > 79 -%}mdi:battery-80
+            {%- elif level > 69 -%}mdi:battery-70
+            {%- elif level > 59 -%}mdi:battery-60
+            {%- elif level > 49 -%}mdi:battery-50
+            {%- elif level > 39 -%}mdi:battery-40
+            {%- elif level > 29 -%}mdi:battery-30
+            {%- elif level > 19 -%}mdi:battery-20
+            {%- elif level > 9 -%}mdi:battery-10
+            {%- else -%}mdi:battery-outline
+            {%- endif -%}
+          {%- endif %}
+
+      landroid_bat_volts:
+        friendly_name: Landroid Battery Volts
+        value_template: "{{ state_attr('sensor.landroid_m_battery', 'battery_voltage') | round(2) }}"
+        icon_template: mdi:battery-charging
+        unit_of_measurement: "V"
+
+      landroid_bat_temp:
+        friendly_name: Landroid Battery Temperature
+        value_template: "{{ state_attr('sensor.landroid_m_battery', 'battery_temperature') | round(1) }}"
+        icon_template: mdi:thermometer
+        unit_of_measurement: "°C"
+          
+      landroid_bat_cc:
+        friendly_name: Landroid Battery Charge cycles
+        value_template: "{{ state_attr('sensor.landroid_m_battery', 'charge_cycles') | int }}"
+        icon_template: mdi:power-plug
+        unit_of_measurement: "x"
+
+
+# Status ##########
+      landroid_bladetime:
+        friendly_name: Landroid Blade Time
+        value_template: "{{ state_attr('sensor.landroid_m_status', 'blade_time') }}"
+        attribute_templates:
+          time_formatted: >
+            {% set t = state_attr('sensor.landroid_m_status', 'blade_time') | int %}
+            {% if t != 0 %}
+              {{ '%0d d %0.02d h %0.02d min' | format(t // 1440, ((t % 1440) // 60), t % 60) }}
+            {% endif %}
+        icon_template: mdi:fan
+        unit_of_measurement: "min"
+
+      landroid_totaltime:
+        friendly_name: Landroid Total Time
+        value_template: "{{ state_attr('sensor.landroid_m_status', 'work_time') }}"
+        attribute_templates:
+          time_formatted: >
+            {% set t = state_attr('sensor.landroid_m_status', 'work_time') | int %}
+            {% if t != 0 %}
+              {{ '%0d d %0.02d h %0.02d min' | format(t // 1440, ((t % 1440) // 60), t % 60) }}
+            {% endif %}
+        icon_template: mdi:bus-clock
+        unit_of_measurement: "min"
+
+      landroid_dist:
+        friendly_name: Landroid Distance
+        value_template: "{{ (state_attr('sensor.landroid_m_status', 'distance') / 1000) |round(2) }}"
+        icon_template: mdi:map-marker-distance
+        unit_of_measurement: "km"
+
+      landroid_lastupdate:
+        friendly_name: Landroid last update
+        value_template: "{{ as_timestamp(strptime( state_attr('sensor.landroid_m_status', 'last_update'), '%H:%M:%S %d/%m/%Y')) | timestamp_custom('%d.%m.%Y %H:%M:%S') }}"
+        icon_template: mdi:clock
+
+
+      landroid_stat:
+        friendly_name: Landroid Status
+        value_template: >
+            {% set stat = state_attr('sensor.landroid_m_status', 'status_id') %}
+            {%- if stat == 0 -%} in Station (Leerlauf)
+            {% elif stat == 1 -%} in Station (Heim)
+            {% elif stat == 2 -%} startet...
+            {% elif stat == 3 -%} fährt raus...
+            {% elif stat == 4 -%} fährt am Draht entlang...
+            {% elif stat == 5 -%} sucht die Station...
+            {% elif stat == 6 -%} sucht Begrenzungsdraht...
+            {% elif stat == 7 -%} mäht...
+            {% elif stat == 8 -%} wurde angehoben
+            {% elif stat == 9 -%} hat ein grobes Problem!
+            {% elif stat == 10 -%} Mähwerk blockiert!
+            {% elif stat == 11 -%} Debug!
+            {% elif stat == 30 -%} Heimfahrt zur Station...
+            {% elif stat == 32 -%} Kantenschnitt...
+            {% elif stat == 33 -%} sucht Mähbereich!
+            {% elif stat == 34 -%} Pause/Gestoppt!
+            {%- endif%}
+
+      landroid_err:
+        friendly_name: Landroid Errors
+        value_template: >
+            {% set stat = state_attr('sensor.landroid_m_error', 'error_id') %}
+            {%- if stat == 0 -%} Kein Fehler
+            {% elif stat == 1 -%} Mäher festgefahren!
+            {% elif stat == 2 -%} Mäher angehoben!
+            {% elif stat == 3 -%} Draht fehlt!
+            {% elif stat == 4 -%} Ausserhalb der Begrenzung!
+            {% elif stat == 5 -%} Wegen Regen angehalten!
+            {% elif stat == 8 -%} Fehler am Messermotor!
+            {% elif stat == 9 -%} Fehler am Fahrmotor!
+            {% elif stat == 11 -%} Mäher umgekippt!
+            {% elif stat == 12 -%} Akku leer!
+            {% elif stat == 13 -%} Draht vertauscht!
+            {% elif stat == 14 -%} Akku Ladefehler!
+            {% elif stat == 15 -%} Station nicht gefunden!
+            {% elif stat == 16 -%} Mäher gesperrt!
+            {% elif stat == 17 -%} Akkutemperatur zu hoch
+            {%- endif%}
+ 
+
+# -55 or higher: 4 bars
+# -56 to -66: 3 bars
+# -67 to -77: 2 bars
+# -78 to -88: 1 bar
+# -89 or lower: 0 bars
+      landroid_wifi:
+        friendly_name: Landroid WIFI Quality
+        value_template: "{{ state_attr('sensor.landroid_m_status', 'rssi') }}"
+        icon_template: >-
+          {% set strength = state_attr('sensor.landroid_m_status', 'rssi') | float -%}
+          {%- if strength > -56 -%}mdi:wifi-strength-4
+          {% elif strength > -67 -%}mdi:wifi-strength-3
+          {% elif strength > -78 -%}mdi:wifi-strength-2
+          {% elif strength > -89 -%}mdi:wifi-strength-1
+          {%- else -%}mdi:wifi-strength-outline
+          {%- endif %}
+        unit_of_measurement: "dBm"
+
+      landroid_yaw:
+        friendly_name: Landroid Yaw
+        value_template: "{{ state_attr('sensor.landroid_m_status', 'yaw') }}"
+        icon_template: mdi:axis-z-rotate-clockwise
+        unit_of_measurement: "°"
+
+      landroid_roll:
+        friendly_name: Landroid Roll
+        value_template: "{{ state_attr('sensor.landroid_m_status', 'roll') }}"
+        icon_template: mdi:axis-x-rotate-clockwise
+        unit_of_measurement: "°"
+
+      landroid_pitch:
+        friendly_name: Landroid Pitch
+        value_template: "{{ state_attr('sensor.landroid_m_status', 'pitch') }}"
+        icon_template: mdi:seat-flat-angled
+        unit_of_measurement: "°"
+
+# Input Number ######################################################
+input_number:
+  landroid_raindelay:
+    name: Rain delay
+    initial: 150
+    min: 0
+    max: 300
+    step: 30
+    unit_of_measurement: "min"
+    icon: mdi:weather-lightning-rainy
+
+  landroid_timeextension:
+    name: Time extension
+    initial: 0
+    min: -100
+    max: 100
+    step: 10
+    unit_of_measurement: "%"
+    icon: mdi:clock-out
+
+# Input Boolean #####################################################
+input_boolean:
+# Booleans for Lovelace
+  landroid_sched_settings:
+    name: Scheduler settings
+    icon: mdi:file-hidden
+    initial: false
+  landroid_info_toggle:
+    name: Info toggle
+    icon: mdi:file-hidden
+    initial: false
+
+# Automations #######################################################
+automation:
+# Status notificaion
+  - id: landroid_notify_status
+    alias: Landroid Notify Status
+    initial_state: false
+    trigger:
+    - platform: state
+      entity_id: sensor.landroid_m_status
+
+    condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
+
+    action:
+    - service: persistent_notification.create
+      data_template:
+        title: 🏎️ Landroid
+        message: "*{{ trigger.to_state.state }}* <- {{ trigger.from_state.state }} - {{ states('sensor.date_time') }}"
+
+# Error notificaion
+  - id: landroid_notify_error
+    alias: Landroid Notify Error
+    initial_state: false
+    trigger:
+    - platform: state
+      entity_id: sensor.landroid_m_error
+
+    condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
+
+    action:
+    - service: persistent_notification.create
+      data_template:
+        title: 🏎️ Landroid
+        message: "*{{ trigger.to_state.state }}* <- {{ trigger.from_state.state }} - {{ states('sensor.date_time') }}"
+
+# Sync Landroid states
+  - id: landroid_sync_values
+    alias: Landroid sync values
+    trigger:
+      platform: state
+      entity_id: sensor.landroid_lastupdate
+
+    action:
+# Get rain delay
+      - service: input_number.set_value
+        data_template:
+          entity_id: input_number.landroid_raindelay
+          value: "{{ state_attr('sensor.landroid_m_status','raindelay') | int }}"
+# Get time extension
+      - service: input_number.set_value
+        data_template:
+          entity_id: input_number.landroid_timeextension
+          value: "{{ state_attr('sensor.landroid_m_status','timeextension') | int }}"
+
+# Scripts ###########################################################
+# Services
+# landroid_cloud.start
+# landroid_cloud.stop
+# landroid_cloud.pause
+# landroid_cloud.config
+
+script:
+# Starts the mower
+  landroid_start:
+    alias: Landroid Start
+    sequence:
+      service: landroid_cloud.start
+      data_template:
+        id: "{{ state_attr('sensor.landroid_m_status','id') }}"
+
+# Stops the mower and sends it home
+  landroid_home:
+    alias: Landroid Home
+    sequence:
+      service: landroid_cloud.home
+      data_template:
+        id: "{{ state_attr('sensor.landroid_m_status','id') }}"
+
+# Pause the mower
+  landroid_pause:
+    alias: Landroid Pause
+    sequence:
+      service: landroid_cloud.pause
+      data_template:
+        id: "{{ state_attr('sensor.landroid_m_status','id') }}"
+
+# Set rain delay and time extension
+  landroid_set_config:
+    alias: Landroid set config
+    sequence:
+      service: landroid_cloud.config
+      data_template:
+        id: "{{ state_attr('sensor.landroid_m_status','id') }}"
+        raindelay: "{{ states('input_number.landroid_raindelay') | int }}"
+        timeextension: "{{ states('input_number.landroid_timeextension') | int }}"
+        

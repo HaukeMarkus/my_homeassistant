@@ -1,0 +1,444 @@
+title: Homekit Test
+icon: 'mdi:home-assistant'
+path: homekit
+panel: true
+cards:
+  - type: "custom:homekit-card"
+    breakOnMobile: true
+    statePositionTop: true
+    enableColumns: true
+    rows:
+      - row: 1
+        columns:
+          - column: 1
+            tileOnRow: 4
+            entities:
+              - title: Müllabholung
+                entities:
+                  - type: custom:button-card
+                    entity: sensor.ics_1
+                    name: Papier
+                    # icon: mdi:package-variant
+                    label: >
+                        [[[
+                          var r = states['sensor.ics_1'].attributes.remaining;
+                          if(r===0) return 'Abholung heute';
+                          else if (r>0) return ('in ' + r + ' Tagen');
+                        ]]]
+                    show_state: true
+                    show_label: true
+                    styles:
+                      icon:
+                        - color: rgb(10, 80, 137)
+                      grid:
+                        - grid-template-areas: '"i" "n" "s" "l"'
+                        - grid-template-columns: 1fr
+                        - grid-template-rows: 1fr min-content min-content
+                      img_cell:
+                        - align-self: start
+                        - text-align: start
+                        
+                      name:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-weight: bold
+                        - font-size: 16px
+                      label:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-size: 12px
+                      state:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-size: 12px
+                  
+                            
+                  - type: custom:button-card
+                    entity: sensor.ics_2
+                    name: Bioabfall
+                    icon: mdi:tree
+                    label: >
+                        [[[
+                          var r = states['sensor.ics_2'].attributes.remaining;
+                          if(r===0) return 'Abholung heute';
+                          else if (r>0) return ('in ' + r + ' Tagen');
+                        ]]]
+                    show_state: true
+                    show_label: true
+                    styles:
+                      grid:
+                        - grid-template-areas: '"i" "n" "s" "l"'
+                        - grid-template-columns: 1fr
+                        - grid-template-rows: 1fr min-content min-content
+                      img_cell:
+                        - align-self: start
+                        - text-align: start
+                      icon:
+                        - color: rgb(146, 95, 58)
+                      name:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-weight: bold
+                        - font-size: 16px
+                      label:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-size: 12px
+                      state:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-size: 12px
+
+
+                  - type: custom:button-card
+                    entity: sensor.ics_3
+                    name: Gelber Sack
+                    icon: mdi:recycle
+                    label: >
+                        [[[
+                          var r = states['sensor.ics_3'].attributes.remaining;
+                          if(r===0) return 'Abholung heute';
+                          else if (r>0) return ('in ' + r + ' Tagen');
+                        ]]]
+                    show_state: true
+                    show_label: true
+                    styles:
+                      grid:
+                        - grid-template-areas: '"i" "n" "s" "l"'
+                        - grid-template-columns: 1fr
+                        - grid-template-rows: 1fr min-content min-content
+                      img_cell:
+                        - align-self: start
+                        - text-align: start
+                      icon:
+                        - color: rgb(255,218,68)
+                      name:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-weight: bold
+                        - font-size: 16px
+                      label:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-size: 12px
+                      state:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-size: 12px
+
+
+                  - type: custom:button-card
+                    entity: sensor.ics_4
+                    name: Restmüll
+                    icon: mdi:trash-can-outline
+                    label: >
+                        [[[
+                          var r = states['sensor.ics_4'].attributes.remaining;
+                          if(r===0) return 'Abholung heute';
+                          else if (r>0) return ('in ' + r + ' Tagen');
+                        ]]]
+                    show_state: true
+                    show_label: true
+                    styles:
+                      grid:
+                        - grid-template-areas: '"i" "n" "s" "l"'
+                        - grid-template-columns: 1fr
+                        - grid-template-rows: 1fr min-content min-content
+                      img_cell:
+                        - align-self: start
+                        - text-align: start
+                      icon:
+                        - color: rgb(65, 66, 64)
+                      name:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-weight: bold
+                        - font-size: 16px
+                      label:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-size: 12px
+                      state:
+                        - justify-self: start
+                        - padding-left: 10px
+                        - font-size: 12px
+                  
+
+
+
+      - row: 2
+        columns:
+          - column: 1
+            tileOnRow: 4
+            entities:
+              - title: Wetter Info
+                useTemperature: true
+                entities:
+                  - type: weather-forecast
+                    entity: weather.openweathermap
+                    name: Dreieich
+                    show_forecast: true
+                    secondary_info_attribute: humidity
+                  - card: custom:mini-graph-card
+                    noPadding: true
+                    cardOptions:
+                      entities:
+                        - entity: sensor.openweathermap_temperature       
+                          name: Außen
+                  - card: custom:mini-graph-card
+                    noPadding: true
+                    cardOptions:
+                      entities:
+                        - entity: sensor.openweathermap_humidity          
+                          name: Luftfeuchte
+          - column: 2
+            tileOnRow: 4
+            entities:
+              - title: Raumklima
+                entities:
+                  - entity: sensor.shelly_shht_1_f03c8b_temperature
+                    name: Flur oben
+                    icon: mdi:thermometer
+                  - entity: sensor.shelly_shht_1_f05641_temperature 
+                    name: Büro
+                    icon: mdi:thermometer
+                  - entity: sensor.fritzschalter_temperatur 
+                    name: Wohnzimmer
+                    icon: mdi:thermometer
+      - row: 3
+        columns:
+          - column: 1
+            tileOnRow: 4
+            entities:
+              - title: Licht
+                entities:
+                  - entity: switch.fritzschalter
+                    name: Stern Wohnzimmer
+                    icon: mdi:star-outline
+                  - entity: switch.licht_flur_eg
+                    name: Stern Flur
+                    icon: mdi:star-outline
+                  - entity: light.shelly_shdm_2_d8bfc019d0d9
+                    name: Dimmer
+                    icon: mdi:ceiling-light
+          - column: 2
+            tileOnRow: 4
+            entities:
+              - title: Lichter Garten
+                entities:
+                  - entity: light.shelly_shsw_1_111a7a
+                    name: Garten links hinten 
+                    icon: mdi:spotlight-beam
+                  - entity: light.shelly_shsw_1_1179e3
+                    name: Garten hinten Mitte 
+                    icon: mdi:spotlight-beam
+                  - entity: light.shelly_shsw_1_500291f04b61
+                    name: Vordere Hainbuche 
+                    icon: mdi:spotlight-beam
+                  - entity: light.shelly_shsw_1_f4cfa2768401
+                    name: Hintere Hainbuche 
+                    icon: mdi:spotlight-beam
+      - row: 4
+        columns:
+          - column: 1
+            tileOnRow: 4
+            entities:
+              - title: Beregnung
+                entities:
+                  - entity: switch.irrigation_garden_zone1
+                    name: Zone 1(HiLi)
+                    icon: mdi:sprinkler
+                  - entity: switch.irrigation_garden_zone2
+                    name: Zone 2(HiRe)
+                    icon: mdi:sprinkler
+                  - entity: switch.irrigation_garden_zone3
+                    name: Zone 3(Seite)
+                    icon: mdi:sprinkler
+                  - entity: switch.irrigation_garden_zone4
+                    name: Zone 4(Vorne)
+                    icon: mdi:sprinkler   
+
+      #     # - cover.shelly_shsw_25_687819
+      #     # - cover.shelly_shsw_25_687999
+      #     # - cover.shelly_shsw_25_6919b1
+      #     # - cover.shelly_shsw_25_6919b1
+      #     # - cover.shelly_shsw_25_c46c5c
+      #     # - cover.garage
+      #     # - light.shelly_shsw_1_111a7a
+      #     # - light.shelly_shsw_1_1179e3
+      #     # - light.shelly_shsw_1_500291f04b61
+      #     # - light.shelly_shsw_1_f4cfa2768401
+      #     # - light.shelly_shdm_2_d8bfc019d0d9
+      #     # - sensor.dark_sky_temperature
+      #     # - sensor.dark_sky_humidity
+      #     # - sensor.fritzschalter_temperatur
+      #     # - sensor.shelly_shht_1_f03c8b_humidity
+      #     # - sensor.shelly_shht_1_f03c8b_temperature
+      #     # - sensor.shelly_shht_1_f05641_humidity
+      #     # - sensor.shelly_shht_1_f05641_temperature
+
+
+  #     - title: Licht
+  #       entities:
+  # #       - card: custom:blinds-tile-card
+  #         tap_action:
+  #           action: more-info
+  #           entity: input_number.blindone
+  #         cardOptions:
+  #           name: Luxaflex
+  #           entities:
+  #             - entity: input_number.blindone
+  #               positions: 
+  #                 - 60
+  #                 - 0
+  #                 - -45
+  #             - entity: input_number.blindtwo
+  #               positions: 
+  #                 - 75
+  #                 - 0
+  #                 - -50
+  #             - entity: input_number.blindthree
+  #               positions: 
+  #                 - -65
+  #                 - 0
+  #                 - 50
+
+
+
+    # 
+    # home: true
+    # rules: |
+    #   {% if "Vandaag" in states('sensor.blink_gft') %} <li>Vandaag groenebak aan de straat</li> {% endif %}
+    #   {% if "Vandaag" in states('sensor.blink_papier') %} <li>Vandaag oudpapier aan de straat</li> {% endif %}
+    #   {% if "Vandaag" in states('sensor.blink_pmd') %} <li>Vandaag plastic aan de straat</li> {% endif %}
+    #   {% if "Vandaag" in states('sensor.blink_restafval') %} <li>Vandaag grijzebak aan de straat</li> {% endif %}
+    #   {% if states('sensor.current_lights_on') | float > 0 %} <li>{{states('sensor.current_lights_on')}} lampen aan</li> {% endif %}
+    #   {% if states('sensor.current_media_players_on') | float > 0 %} <li>{{states('sensor.current_media_players_on')}} speakers aan</li> {% endif %}
+    # title: "Home"
+    # useBrightness: false
+    # useTemperature: false
+    # titleColor: "#FFF"
+    # entities:
+    #   - title: Navigation
+    #     entities:
+    #       - custom: lampen
+    #         name: Lampen
+    #         icon: mdi:lightbulb-group
+    #         spin: true
+    #         state: sensor.current_lights_on
+    #         tap_action:
+    #           action: navigate
+    #           navigation_path: /lovelace/lampen
+    #         hold_action:
+    #           action: more-info
+    #           entity: group.all_lights
+    #         double_tap_action:
+    #           action: navigate
+    #           navigation_path: /lovelace/dev
+    #   - title: Lampen
+    #     entities: 
+    #       - entity: light.beganegrond
+    #         name: Lichtstrip
+    #         spin: true
+    #         icon: mdi:led-strip-variant
+    #         popup:
+    #           type: custom:light-popup-card
+    #           scenesInARow: 2
+    #           brightnessWidth: 130px
+    #           brightnessHeight: 350px
+    #           switchWidth: 110px
+    #           switchHeight: 300px
+    #           actions:
+    #             - service: scene.turn_on
+    #               service_data:
+    #                 entity_id: scene.ontspannen
+    #               color: "#FDCA64"
+    #               name: ontspannen
+    #             - service: scene.turn_on
+    #               service_data:
+    #                 entity_id: scene.helder
+    #               color: "#FFE7C0"
+    #               name: helder
+    #             - service: scene.turn_on
+    #               service_data:
+    #                 entity_id: scene.concentreren
+    #               color: "#BBEEF3"
+    #               name: concentreren
+    #             - service: scene.turn_on
+    #               service_data:
+    #                 entity_id: scene.energie
+    #               color: "#8BCBDD"
+    #               name: energie
+    #             - service: homeassistant.toggle
+    #               service_data:
+    #                 entity_id: light.voordeurlicht
+    #               name: voordeur
+    #               icon: mdi:lightbulb
+    #       - entity: light.zithoek
+    #         name: Zithoek
+    #         icon: mdi:floor-lamp
+    #         popup:
+    #           type: custom:light-popup-card
+    #           scenesInARow: 2
+    #           brightnessWidth: 130px
+    #           brightnessHeight: 350px
+    #           switchWidth: 110px
+    #           switchHeight: 300px
+    #       - entity: light.eettafel
+    #         name: Eettafel
+    #         icon: mdi:ceiling-light
+    #         popup:
+    #           type: custom:light-popup-card
+    #           scenesInARow: 2
+    #           brightnessWidth: 130px
+    #           brightnessHeight: 350px
+    #           switchWidth: 110px
+    #           switchHeight: 300px
+    #       - entity: light.kookeiland
+    #         name: Kookeiland
+    #         icon: mdi:ceiling-light
+    #         popup:
+    #           type: custom:light-popup-card
+    #           scenesInARow: 2
+    #           brightnessWidth: 130px
+    #           brightnessHeight: 350px
+    #           switchWidth: 110px
+    #           switchHeight: 300px
+    #       - entity: group.outdoor_lights
+    #         name: Buiten verlichting
+    #         tap_action:
+    #           action: toggle
+    #           entity: group.outdoor_lights
+    #   - title: Luxaflex
+    #     entities:
+    #       - entity: weather.weersverwachting
+    #       - card: custom:mini-graph-card
+    #         noPadding: true
+    #         cardOptions:
+    #           entities:
+    #             - sensor.wasmachine_energieverbruik
+    #       - entity: climate.climatedemo
+    #         popup:
+    #           type: custom:thermostat-popup-card
+    #       - card: custom:blinds-tile-card
+    #         tap_action:
+    #           action: more-info
+    #           entity: input_number.blindone
+    #         cardOptions:
+    #           name: Luxaflex
+    #           entities:
+    #             - entity: input_number.blindone
+    #               positions: 
+    #                 - 60
+    #                 - 0
+    #                 - -45
+    #             - entity: input_number.blindtwo
+    #               positions: 
+    #                 - 75
+    #                 - 0
+    #                 - -50
+    #             - entity: input_number.blindthree
+    #               positions: 
+    #                 - -65
+    #                 - 0
+    #                 - 50

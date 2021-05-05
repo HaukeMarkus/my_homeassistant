@@ -1,0 +1,14 @@
+---
+#################################
+##    SHUTTER AUTOMATIONS      ##
+#################################
+
+# Kitchen down
+alias: close_kitchen_shutters_always
+trigger:
+  platform: time
+  at: "22:00:00"
+action:
+- service: cover.close_cover
+  entity_id: 
+    - cover.shelly_shsw_25_rolladen_kueche

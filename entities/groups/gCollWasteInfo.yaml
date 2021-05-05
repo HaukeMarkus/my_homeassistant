@@ -1,0 +1,12 @@
+---
+#
+# Groups of wast sensors
+#
+gcoll_waste_info:
+  name: Müll-Abholungen
+  entities:
+    - sensor.ics_1
+    - sensor.ics_2
+    - sensor.ics_3
+    - sensor.ics_4
+  icon: mdi:delete-empty

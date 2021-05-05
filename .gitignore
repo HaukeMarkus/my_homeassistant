@@ -1,0 +1,34 @@
+# Generic ignores
+*.log
+*.db
+*.db.*
+*.pyc
+*.sh
+._*
+__pycache__
+
+# Directory (contents) ignores
+.cloud
+.storage
+deps
+custom_components/**
+.storage/**
+
+# Specific file ignores
+.config_entries.json
+.homekit.state
+.uuid
+core
+known_devices.yaml
+secrets.yaml
+gcollection_3oak.ics
+
+# Ignore files created by IDE's
+.vscode
+.theia
+.Trash*
+.storage
+.hacs
+
+# Specific keeps
+!.gitkeep

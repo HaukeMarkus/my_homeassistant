@@ -1,0 +1,25 @@
+---
+# Set the default theme on start up of Home Assistant.
+#
+# This, of course, only affects machine that do not
+# have a theme set.
+#
+alias: automatic_day_and_night_theme_switch
+trigger:
+  - platform: homeassistant
+    event: start
+  - platform: state
+    entity_id: sun.sun
+    to: above_horizon
+  - platform: state
+    entity_id: sun.sun
+    to: below_horizon
+action:
+  - service_template: frontend.set_theme
+    data_template:
+      name: >
+        {% if states.sun.sun.state == "above_horizon" %}
+          Google Light Theme
+        {% else %}
+          Google Dark Theme
+        {% endif %}

@@ -1,0 +1,15 @@
+---
+###############################################
+##
+## ics Garbage collection config and sensors
+## Customized for local read ;-)
+###############################################
+
+platform: ics
+id: 2
+name: Bio
+url: !secret gcollection_calendar
+startswith: Biotonne
+timeformat: "%d.%m.%Y"
+lookahead: 30
+icon: mdi:tree

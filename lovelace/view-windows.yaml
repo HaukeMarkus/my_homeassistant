@@ -1,0 +1,52 @@
+title: Fenster
+icon: "mdi:window-shutter"
+path: windows
+cards:
+  - type: entities
+    title: Rolladen Büro
+    show_header_toggle: false
+    entities:
+      - entity: group.g_shutters_front
+      - type: divider
+        style:
+          height: 1px
+          width: 80%
+          margin-left: auto
+          margin-right: auto
+          background: "#62717b"
+      - entity: cover.shelly_shsw_25_rolladen_front
+      - entity: cover.shelly_shsw_25_rolladen_buero_seite
+  - type: entities
+    title: "Rolladen Esszimmer"
+    show_header_toggle: false
+    entities:
+      - entity: cover.shelly_shsw_25_rolladen_kueche
+      - type: divider
+        style:
+          height: 1px
+          width: 80%
+          margin-left: auto
+          margin-right: auto
+          background: "#62717b"
+      - entity: cover.shelly_shsw_25_rolladen_esszimmer
+  - type: entities
+    title: "Rolladen Wohnzimmer"
+    show_header_toggle: false
+    entities:
+      - entity: group.g_shutters_living
+      - type: divider
+        style:
+          height: 1px
+          width: 80%
+          margin-left: auto
+          margin-right: auto
+          background: "#62717b"
+      - entity: cover.shelly_shsw_25_rolladen_links
+      - entity: cover.shelly_shsw_25_rolladen_mitte
+      - entity: cover.shelly_shsw_25_rolladen_rechts
+
+  - type: entities
+    title: "Rolladen Gäste WC"
+    show_header_toggle: false
+    entities:
+      - entity: cover.shelly_shsw_25_rolladen_bad

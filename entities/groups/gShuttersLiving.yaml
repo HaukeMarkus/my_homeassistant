@@ -1,0 +1,17 @@
+---
+#
+# Groups of rollershutters
+#
+g_shutters_living:
+  name: Wohnzimmer
+  entities:
+    - cover.shelly_shsw_25_rolladen_links
+    - cover.shelly_shsw_25_rolladen_mitte
+    - cover.shelly_shsw_25_rolladen_rechts
+
+g_shutters_front:
+  name: Rolladen vorne
+  entities:
+    - cover.shelly_shsw_25_rolladen_front
+    - cover.shelly_shsw_25_rolladen_buero_seite
+    - cover.shelly_shsw_25_rolladen_bad

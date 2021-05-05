@@ -1,0 +1,11 @@
+---
+#
+# System-Info: Load 5 minutes performance
+#
+#
+platform: template
+sensors:
+  load5mperc: 
+    unit_of_measurement: '%'
+    value_template: '{{ states.sensor.load_5m.state | multiply(100)|round(1) }}'
+

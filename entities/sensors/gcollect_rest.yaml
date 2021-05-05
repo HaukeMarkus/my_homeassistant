@@ -1,0 +1,15 @@
+---
+###############################################
+##
+## ics Garbage collection config and sensors
+## Customized for local read ;-)
+###############################################
+
+platform: ics
+id: 4
+name: Restmüll
+url: !secret gcollection_calendar
+timeformat: "%d.%m.%Y"
+startswith: Hausmuell
+lookahead: 30
+icon: mdi:food
