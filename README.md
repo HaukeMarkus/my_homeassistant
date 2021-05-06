@@ -9,7 +9,9 @@ Technically I am actually using a lot of shellies:
 
 Fritz.
 
-Furthermore I have a Fritzbox Switch, a 4chPro switch Tasmota via MQTT.
+Furthermore I have a 
+- Fritzbox Switch, 
+- a 4chPro switch Tasmota via MQTT (https://tasmota.github.io/docs/devices/Sonoff-4CH-Pro/)
 
 <br />
 
@@ -22,7 +24,7 @@ Furthermore I have a Fritzbox Switch, a 4chPro switch Tasmota via MQTT.
 
 [![Become a Patron][become-a-patron-shield]][becomeapatron]
 
-[![Buy me a coffee][buymeacoffee-shield]][buymeacoffee]
+[https://www.buymeacoffee.com/deichgraf][buymeacoffee]
 <br />
 
 # About
