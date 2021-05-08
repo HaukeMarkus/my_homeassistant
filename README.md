@@ -1,17 +1,24 @@
 # homeassistant-config
 ## My HA configuration
+
 My home configuration 
 
+I use my homeassistant to control my home. To move rollershutters after sunrise and sunset I use shellies 2.5.
+To control my irrigation I created a solution based on the SONOFF 4chpro switch from tasmota which controls 4 irrigation zones / valves.
+
+Those are Hunter valves connected to a tube system from Gardena.
+
+
 Technically I am actually using a lot of shellies:
-- Shelly 1
-- Shelly HT
-- Shelly 2.5
+- Shelly 1: as light switches, garage door opener
+- Shelly HT: as temperature sensor
+- Shelly 2.5: as rollershutter driver for my basement windows
 
 Fritz.
 
 Furthermore I have a 
 - Fritzbox Switch, 
-- a 4chPro switch Tasmota via MQTT (https://tasmota.github.io/docs/devices/Sonoff-4CH-Pro/)
+- a SONOFF 4chPro switch Tasmota via MQTT [SONOFF](https://tasmota.github.io/docs/devices/Sonoff-4CH-Pro/)
 
 <br />
 
@@ -20,19 +27,19 @@ Furthermore I have a
 ![GitHub Forks][forks]
 <br />
 
-[![Subscribe to YouTube channel][youtube-sub-shield]][youtubesubscribe]
 
-[![Become a Patron][become-a-patron-shield]][becomeapatron]
+![Buy me a coffee](/image/bmc.png "BMC")
 
-[https://www.buymeacoffee.com/deichgraf][buymeacoffee]
-<br />
+
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/bachya/smart-home/wiki/img/default.png">
+    <img src="https://github.com/bachya/smart-home/wiki/img/default.png" alt="The Home Screen" style="max-width:100%;">
+</a>
 
 # About
 
-Hey guys, Juan here from [juanmtech.com](https://www.juanmtech.com). These are the Home Assistant configuration files I use in my personal Home Assistant set up. Hopefully, this repository can help you get started with Home Assistant and give you some ideas for your own configuration.
+Hi folks, Hauke here from Germany. This my Home Assistant configuration files. 
+Hopefully, this repository can help you get started with Home Assistant and give you some ideas for your own configuration.
 
-If you are new to Home Assistant, I recommend visiting my [YouTube channel](https://www.youtube.com/JuanMTech) and [website](https://www.juanmtech.com) where you can find easy to follow tutorials on how to get started.<br />
-<br />
 
 ## Lovelace set up
 
@@ -59,8 +66,5 @@ If you are new to Home Assistant, I recommend visiting my [YouTube channel](http
 </TABLE>
 <br />
 
-## Home Assistant tutorials
 
-Here are some of the tutorials that can get you started with Home Assistant:<br />
-<br />
 
