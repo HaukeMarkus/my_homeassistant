@@ -38,12 +38,26 @@ Hopefully, this repository can help you get started with Home Assistant and give
 
 
 ## My lovelace set up
-Follows screenshots of my lovelace views
-[![irrigation][irrigation-shield]]
-[![Mowerbasic][mower_1-shield]]
-[![Mowerext][mower_2-shield]]
-[![Otherlook][samestuff-shield]]
-[![Wastecal][waste-shield]]
+Follows screenshots of my lovelace views:
+1. My irrigation system
+
+![Irrigation system][irrigation-shield]
+
+2. My Landroid Mower - first view
+
+![Mower basic][mower_1-shield]
+
+3. My Landroid Mower - second view
+
+![Mower extended][mower_2-shield]
+
+4. Another look with same components
+
+![Other look][samestuff-shield]
+
+5. My waste calendar solution based on [Kolja Windelers ICS](https://github.com/KoljaWindeler/ics)
+
+![Wastecal][waste-shield]
 
 
 
