@@ -2,6 +2,7 @@
 *.log
 *.db
 *.db.*
+*.db*
 *.pyc
 *.sh
 ._*
