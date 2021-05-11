@@ -10,16 +10,16 @@ From a device point of view I started using homematic radio switches and shutter
 Nowadays I use Shelly devices for doing so which is way less messy, given the fact they are 100% WLAN devices that do not need any special radio appliance.
 
 ### SONOFF
-For the garden irrigation I have four Hunter valves serving four zones in my garden. The irrgation controlling is being switched by a ([SONOFF 4ch pro](https://sonoff.tech/product/diy-smart-switch/4chr3-4chpror3/)). As irrigation solution I use @kloggy's  ([solution](https://github.com/kloggy/HA-Irrigation-Version2)), that I slightly adopted as you can see in my screenshots.
+For the garden irrigation I have four Hunter valves serving four zones in my garden. The irrgation controlling is being switched by a [SONOFF 4ch pro](https://sonoff.tech/product/diy-smart-switch/4chr3-4chpror3/). As irrigation solution I use @kloggy's  [solution](https://github.com/kloggy/HA-Irrigation-Version2), that I slightly adopted as you can see in my screenshots.
 
 ### Shellies in use
-- 8 ![Shelly 1](https://shelly.cloud/products/shelly-1-smart-home-automation-relay/): as light switches, garage door opener
-- 8 ![Shelly 2.5](https://shelly.cloud/products/shelly-25-smart-home-automation-relay/): as rollershutter driver for my basement windows
-- 2 ![Shelly HT](https://shelly.cloud/products/shelly-humidity-temperature-smart-home-automation-sensor/): as temperature sensor
+- 8 [Shelly 1](https://shelly.cloud/products/shelly-1-smart-home-automation-relay/): as light switches, garage door opener
+- 8 [Shelly 2.5](https://shelly.cloud/products/shelly-25-smart-home-automation-relay/): as rollershutter driver for my basement windows
+- 2 [Shelly HT](https://shelly.cloud/products/shelly-humidity-temperature-smart-home-automation-sensor/): as temperature sensor
 
 
 ### Lawnmower
-I use a Worx Landroid 500E for my garden. The device is controlled ![@barma-lej's](https://github.com/Barma-lej/halandroid/commits?author=Barma-lej)
+I use a Worx Landroid 500E for my garden. The device is controlled [@barma-lej's](https://github.com/Barma-lej/halandroid/commits?author=Barma-lej)
 
 
 <br />
