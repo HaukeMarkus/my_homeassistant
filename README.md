@@ -1,6 +1,6 @@
 # homeassistant-config
 
-## My home configuration 
+## Configuration 
 It's already some time ago, that I moved to Homeassistant as my perferred home automation solution away from openhab with absolutely no regrets.
 
 I use homeassistant for controlling shutters, light, garage and the garden irrigation.
