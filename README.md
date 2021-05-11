@@ -39,11 +39,11 @@ Hopefully, this repository can help you get started with Home Assistant and give
 
 ## My lovelace set up
 Follows screenshots of my lovelace views
-[![irrigation][irrigation-shield]]
-[![Mowerbasic][mower_1-shield]]
-[![Mowerext][mower_2-shield]]
-[![Otherlook][samestuff-shield]]
-[![Wastecal][waste-shield]]
+[irrigation-shield]
+[mower_1-shield]
+[mower_2-shield]
+[samestuff-shield]
+[waste-shield]
 
 
 
