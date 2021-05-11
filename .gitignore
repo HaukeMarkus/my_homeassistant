@@ -13,6 +13,7 @@ __pycache__
 deps
 custom_components/**
 .storage/**
+www/**
 
 # Specific file ignores
 .config_entries.json
