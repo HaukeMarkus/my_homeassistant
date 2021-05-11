@@ -1,24 +1,26 @@
 # homeassistant-config
-## My HA configuration
 
-My home configuration 
+## My home configuration 
+It's already some time ago, that I moved to Homeassistant as my perferred home automation solution away from openhab with absolutely no regrets.
 
-I use my homeassistant to control my home. To move rollershutters after sunrise and sunset I use shellies 2.5.
-To control my irrigation I created a solution based on the SONOFF 4chpro switch from tasmota which controls 4 irrigation zones / valves.
+I use homeassistant for controlling shutters, light, garage and the garden irrigation.
 
-Those are Hunter valves connected to a tube system from Gardena.
+## Devices
+From a device point of view I started using homematic radio switches and shuttercontrols. As my first hardware was a raspberry pi 3 I used the HM-MOD-RF for it. 
+Nowadays I use Shelly devices for doing so which is way less messy, given the fact they are 100% WLAN devices that do not need any special radio appliance.
+
+### SONOFF
+For the garden irrigation I have four Hunter valves serving four zones in my garden. The irrgation controlling is being switched by a [SONOFF 4ch pro](https://sonoff.tech/product/diy-smart-switch/4chr3-4chpror3/). As irrigation solution I use @kloggy's  [solution](https://github.com/kloggy/HA-Irrigation-Version2), that I slightly adopted as you can see in my screenshots.
+
+### Shellies in use
+- 8 [Shelly 1](https://shelly.cloud/products/shelly-1-smart-home-automation-relay/): as light switches, garage door opener
+- 8 [Shelly 2.5](https://shelly.cloud/products/shelly-25-smart-home-automation-relay/): as rollershutter driver for my basement windows
+- 2 [Shelly HT](https://shelly.cloud/products/shelly-humidity-temperature-smart-home-automation-sensor/): as temperature sensor
 
 
-Technically I am actually using a lot of shellies:
-- Shelly 1: as light switches, garage door opener
-- Shelly HT: as temperature sensor
-- Shelly 2.5: as rollershutter driver for my basement windows
+### Lawnmower
+I use a Worx Landroid 500E for my garden. The device is controlled @barma-lej's (https://github.com/Barma-lej/halandroid)
 
-Fritz.
-
-Furthermore I have a 
-- Fritzbox Switch, 
-- a SONOFF 4chPro switch Tasmota via MQTT [SONOFF](https://tasmota.github.io/docs/devices/Sonoff-4CH-Pro/)
 
 <br />
 
@@ -28,43 +30,20 @@ Furthermore I have a
 <br />
 
 
-![Buy me a coffee](/image/bmc.png "BMC")
+![Buy me a coffee](/image/bmc.png "Buy me a coffee MC")
 
 
-<a target="_blank" rel="noopener noreferrer" href="https://github.com/bachya/smart-home/wiki/img/default.png">
-    <img src="https://github.com/bachya/smart-home/wiki/img/default.png" alt="The Home Screen" style="max-width:100%;">
-</a>
 
 # About
 
-Hi folks, Hauke here from Germany. This my Home Assistant configuration files. 
+Hi folks, Hauke here from Frankfurt, Germany. This my Home Assistant configuration files. 
 Hopefully, this repository can help you get started with Home Assistant and give you some ideas for your own configuration.
 
 
-## Lovelace set up
+## My lovelace set up
+Follows screenshots of my lovelace views
 
-<TABLE>
-<TR>
-    <TD>
-    <img src="https://raw.githubusercontent.com/JuanMTech/Home_Assistant_files/master/images/Home_Assistant_Images/HA_UI_1.png"<br/>
-    </TD>
-    <TD>
-    <img src="https://raw.githubusercontent.com/JuanMTech/Home_Assistant_files/master/images/Home_Assistant_Images/HA_UI_2.png"<br/>
-    </TD>
-</TR>
-</TABLE>
 
-<TABLE>
-<TR>
-    <TD>
-    <img src="https://raw.githubusercontent.com/JuanMTech/Home_Assistant_files/master/images/Home_Assistant_Images/HA_UI_3.png"<br/>
-    </TD>
-    <TD>
-    <img src="https://raw.githubusercontent.com/JuanMTech/Home_Assistant_files/master/images/Home_Assistant_Images/HA_UI_4.png"<br/>
-    </TD>
-</TR>
-</TABLE>
-<br />
 
 
 
