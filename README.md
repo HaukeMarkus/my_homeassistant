@@ -26,16 +26,13 @@ I use a Worx Landroid 500E for my garden. The device is controlled [@barma-lej's
 
 ![GitHub Watchers][watchers]
 ![GitHub Stars][stars]
-![GitHub Forks][forks]
+
 <br />
 
-
-![Buy me a coffee](/image/bmc.png "Buy me a coffee MC")
-
+[![Buy me a coffee][buymeacoffee-shield]][buymeacoffee]
 
 
 # About
-
 Hi folks, Hauke here from Frankfurt, Germany. This my Home Assistant configuration files. 
 Hopefully, this repository can help you get started with Home Assistant and give you some ideas for your own configuration.
 
@@ -50,3 +47,4 @@ Follows screenshots of my lovelace views
 [watchers]: https://img.shields.io/github/watchers/haukemarkus/my_homeassistant?style=social
 [stars]: https://img.shields.io/github/stars/haukemarkus/my_homeassistant?style=social
 [buymeacoffee]: https://www.buymeacoffee.com/deichgraf
+[buymeacoffee-shield]: /image/bmc.png
