@@ -19,8 +19,8 @@ For the garden irrigation I have four Hunter valves serving four zones in my gar
 
 
 ### Lawnmower
-I use a Worx Landroid 500E for my garden. The device is controlled [@barma-lej's](https://github.com/Barma-lej/halandroid/commits?author=Barma-lej)
-
+I use a Worx Landroid 500E for my garden. The device is controlled [@barma-lej's](https://github.com/Barma-lej/halandroid
+)
 
 <br />
 
@@ -47,3 +47,6 @@ Follows screenshots of my lovelace views
 
 
 
+[watchers]: https://img.shields.io/github/watchers/haukemarkus/my_homeassistant?style=social
+[stars]: https://img.shields.io/github/stars/haukemarkus/my_homeassistant?style=social
+[buymeacoffee]: https://www.buymeacoffee.com/deichgraf
